@@ -13,12 +13,13 @@ export default function SignUpPage() {
     try {
       // Your signup API call here
       // Example:
-      // const response = await fetch('/api/auth/signup', {
+      // const response = await fetch('https://appsailmockdata-10102165915.development.catalystappsail.com/api/userList/login', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(formData)
       // });
       // const result = await response.json();
+      // console.log(result);
       
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
