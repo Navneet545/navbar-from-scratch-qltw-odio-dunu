@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logo from "../public/truactlogo.png";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -19,9 +20,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
-
-  const isLogedin = localStorage.getItem('token');
-  console.log(isLogedin);
+  const [isLogedin, setIsLogedin] = useState(null); // Start with null to indicate loading
 
   // Routes where Navbar and Footer should be hidden
   const excludedRoutes = [
@@ -38,9 +37,40 @@ export default function RootLayout({ children }) {
     pathname.startsWith(route)
   );
 
-  if(!isLogedin){
-    router.push('/login');
+  useEffect(() => {
+    // This code only runs on the client side
+    const token = localStorage.getItem('token');
+    setIsLogedin(!!token); // Convert to boolean
+    console.log('Token found:', !!token);
+
+    // Redirect logic - only run on client side
+    if (!token && !excludedRoutes.some(route => pathname.startsWith(route))) {
+      router.push('/login');
+    }
+  }, [pathname, router]);
+
+  // Show loading state while checking authentication
+  if (isLogedin === null) {
+    return (
+      <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <AppSettingsProvider>
+              <CustomThemeProvider>
+                <div className="flex items-center justify-center min-h-screen">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)] mx-auto"></div>
+                    <p className="mt-4 text-[var(--foreground)]">Loading...</p>
+                  </div>
+                </div>
+              </CustomThemeProvider>
+            </AppSettingsProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    );
   }
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
