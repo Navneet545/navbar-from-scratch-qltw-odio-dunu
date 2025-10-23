@@ -5,7 +5,9 @@ import { Mail, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PasswordSettings from "@/components/Settings/resetPassword";
 import EmailSetting from "@/components/Settings/changeEmail";
-import profile2 from "../../public/profileImage.png"
+import profile2 from "../../public/profileImage.png";
+import withAuth from '@/hoc/withAuth';
+import { useRouter } from "next/navigation";
 
 // Custom Select Component (reuse the same one)
 const CustomSelect = ({ options, placeholder, value, onChange }) => {
@@ -61,9 +63,14 @@ const [isOpen, setIsOpen] = useState(false);
   );
 };
 
-export default function ProfileSettingsPage() {
+const ProfileSettingsPage = () => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [userData, setUserData] = useState(false);
+
+  const router = useRouter();
+  
+     const isLogedin = localStorage.getItem('token');
+    console.log(isLogedin);
 
   const [profileData, setProfileData] = useState({
     firstName: "",
@@ -106,8 +113,13 @@ export default function ProfileSettingsPage() {
     }));
   };
 
+
+  if(!isLogedin){
+    router.push('/login');
+  }
+
   return (
-    <div className="min-h-screen flex justify-center bg-[var(--background)] text-[var(--foreground)]">
+    isLogedin && <div className="min-h-screen flex justify-center bg-[var(--background)] text-[var(--foreground)]">
       <div
         className="w-full p-8 m-5 mt-1"
         style={{
@@ -381,3 +393,5 @@ export default function ProfileSettingsPage() {
     </div>
   );
 }
+
+export default ProfileSettingsPage;

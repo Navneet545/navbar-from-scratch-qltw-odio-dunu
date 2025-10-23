@@ -5,6 +5,8 @@ import profile from "../../public/profileavatar.png";
 import logo from "../../public/truactlogo.png";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -58,6 +60,8 @@ const Page = () => {
   const isAdmin = true;
   const { appName, appNameForMobile} = useAppSettings();
   console.log(appName, appNameForMobile);
+
+  const router = useRouter();
   
 
   const users = [
@@ -401,6 +405,26 @@ const Page = () => {
   // const visibleModules = navItems.slice(0, 5);
   // const hiddenModules = navItems.slice(5);
 
+  const handleLogout = async () => {
+  try {
+    const response = await axios.post(
+      "https://appsailmockdata-10102165915.development.catalystappsail.com/api/userList/logout",
+      {},
+      { withCredentials: true }
+    );
+    console.log(response);
+    // Clear frontend state
+    // localStorage.removeItem("userInfo");
+    if(response.status === 200 && response.data){
+      localStorage.removeItem("token");
+      router.replace("/login");
+    }
+  } catch (err) {
+    console.error("Logout failed", err);
+  }
+};
+
+
   return (
     <div className="bg-background text-foreground">
       <nav
@@ -519,8 +543,9 @@ const Page = () => {
                         href="#"
                         className="flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-[var(--hover-bg)] border-t rounded-b-md"
                         style={{ borderTopColor: "var(--border-top)" }}
+                        onClick={handleLogout} 
                       >
-                        <LogOut className="w-4 h-4" />
+                        <LogOut className="w-4 h-4"/>
                         Logout
                       </Link>
                     </div>

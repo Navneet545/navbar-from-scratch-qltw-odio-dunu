@@ -1,8 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import withAuth from '@/hoc/withAuth';
+import { useRouter } from "next/navigation";
 
 const DashboardPage = () => {
   const [tokenData, setTokenData] = useState(null);
+  const router = useRouter();
+
+   const isLogedin = localStorage.getItem('token');
+  console.log(isLogedin);
 
   useEffect(() => {
     // Get token from localStorage
@@ -30,6 +36,10 @@ const DashboardPage = () => {
       setTokenData(decoded); // Save decoded payload to state
     }
   }, []);
+
+  if(!isLogedin){
+    router.push('/login');
+  }
 
   return (
     <div className="flex-grow w-full overflow-y-auto p-2">
