@@ -408,18 +408,20 @@ export default function DonationForm() {
 
       {/* Donation Scheme */}
       <div className="flex flex-col">
-        <p className="text-sm font-semibold mb-2">Donation Schemes *</p>
-        <div className="grid grid-cols-2 gap-2">
-          {["Education", "Health", "Environment", "Animal Welfare"].map((scheme) => (
-            <FormCheckbox
-              key={scheme}
-              label={scheme}
-              name="donationSchemes"
-              value={scheme}
-              checked={formData.donationSchemes.includes(scheme)}
-              onChange={handleInputChange}
-            />
-          ))}
+        <div className="flex">
+          <p className="text-sm font-semibold mb-2 w-34">Donation Schemes *</p>
+          <div className="grid grid-cols-2 gap-2 w-full">
+            {["Education", "Health", "Environment", "Animal Welfare"].map((scheme) => (
+              <FormCheckbox
+                key={scheme}
+                label={scheme}
+                name="donationSchemes"
+                value={scheme}
+                checked={formData.donationSchemes.includes(scheme)}
+                onChange={handleInputChange}
+              />
+            ))}
+          </div>
         </div>
         {errors.donationSchemes && (
           <p className="text-xs text-red-500 mt-1">{errors.donationSchemes}</p>
@@ -428,16 +430,18 @@ export default function DonationForm() {
 
       {/* File Uploads */}
       <div className="flex flex-col">
-        <label className="text-sm mb-1">Upload Image *</label>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={handleInputChange}
-          className={`w-full border rounded-lg p-2 ${
-            errors.image ? "border-red-500" : "border-[var(--border-color)]"
-          }`}
-        />
+        <div className="flex">
+          <label className="text-sm mb-1 w-34">Upload Image *</label>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleInputChange}
+            className={`w-full border rounded-lg p-2 ${
+              errors.image ? "border-red-500" : "border-[var(--border-color)]"
+            }`}
+          />
+        </div>
         {errors.image && <p className="text-xs text-red-500 mt-1">{errors.image}</p>}
         {formData.image && !errors.image && (
           <p className="text-xs text-green-600 mt-1">✓ {formData.image.name}</p>

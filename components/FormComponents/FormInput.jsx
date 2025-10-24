@@ -56,7 +56,7 @@ if (type === "radio") {
   return (
     <div className="flex flex-col">
       <div className="flex">
-        <label className="text-sm mb-1 w-1/2">{label}</label>
+        <label className="text-sm mb-1 w-34">{label}</label>
         <div className="flex space-x-4 w-full">
           {options.map((option) => (
             <label key={option.value} className="flex items-center space-x-2">
@@ -97,7 +97,7 @@ if (type === "radio") {
     return (
       <div className="flex flex-col">
         <div className="flex">
-          <label className="text-sm mb-1 w-1/2">{label}</label>
+          <label className="text-sm mb-1 w-34">{label}</label>
           <div className="relative">
             <input
               type="text" // Use text instead of url to avoid browser validation
@@ -119,7 +119,7 @@ if (type === "radio") {
               </div>
             )}
             {value && !isUrlValid && (
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-orange-500" title="Invalid URL format">
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-500" title="Invalid URL format">
                 ⚠
               </div>
             )}
