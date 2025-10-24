@@ -62,7 +62,7 @@ export function ThemeProvider({ children }) {
       console.log("API Response:", result);
       
       if (result && result.length > 0) {
-        const themeData = result[0].Theme_Settings;
+        const themeData = result[0].Theme;
         
         const newColors = {
           primary: themeData?.primaryColor || DEFAULT_COLORS.primary,
