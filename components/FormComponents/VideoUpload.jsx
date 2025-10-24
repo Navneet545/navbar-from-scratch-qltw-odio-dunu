@@ -22,21 +22,23 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm mb-1">{label}</label>
+      <div className="flex">
+        <label className="text-sm mb-1 w-34">{label}</label>
       
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept={accept}
-        onChange={handleFileChange}
-        className={`w-full border rounded-lg p-2 ${
-          error ? "border-red-500" : "border-[var(--border-color)]"
-        }`}
-      />
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept={accept}
+          onChange={handleFileChange}
+          className={`w-full border rounded-lg p-2 ${
+            error ? "border-red-500" : "border-[var(--border-color)]"
+          }`}
+        />
+      </div>
 
       {/* Compact File Info */}
       {value && (
-        <div className="mt-2 p-2 border border-green-200 rounded-lg bg-green-50">
+        <div className="mt-2 p-2 border border-[var(--color-secondary)] rounded-lg bg-[var(--color-tertiary)]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 flex-1 min-w-0">
               <span className="text-green-600 text-sm">✓</span>
@@ -52,7 +54,7 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
               <button
                 type="button"
                 onClick={() => setShowPreview(!showPreview)}
-                className="px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-2 py-1 text-xs bg-[var(--color-secondary)] text-white rounded hover:bg-[var(--color-secondary-hover)]"
               >
                 {showPreview ? 'Hide' : 'Show'} Preview
               </button>
@@ -68,7 +70,7 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
 
           {/* Collapsible Video Preview */}
           {showPreview && (
-            <div className="mt-3 pt-3 border-t border-green-200">
+            <div className="mt-3 pt-3 border-t border-[var(--color-secondary)]">
               <video controls className="w-full max-w-md rounded border mx-auto">
                 <source src={URL.createObjectURL(value)} type={value.type} />
                 Your browser does not support the video element.

@@ -29,18 +29,20 @@ export default function CompactDocumentUpload({
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm mb-1">{label}</label>
+      <div className="flex">
+        <label className="text-sm mb-1 w-34">{label}</label>
       
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        accept=".pdf,.doc,.docx,.txt,.rtf"
-        onChange={handleFileChange}
-        className={`w-full border rounded-lg p-2 ${
-          error ? "border-red-500" : "border-[var(--border-color)]"
-        }`}
-      />
+        <input
+          ref={fileInputRef}
+          type="file"
+          multiple
+          accept=".pdf,.doc,.docx,.txt,.rtf"
+          onChange={handleFileChange}
+          className={`w-full border rounded-lg p-2 ${
+            error ? "border-red-500" : "border-[var(--border-color)]"
+          }`}
+        />
+      </div>
 
       {/* Single Line Files List */}
       {value.length > 0 && (
@@ -57,7 +59,7 @@ export default function CompactDocumentUpload({
               Clear all
             </button>
           </div>
-          <div className="flex flex-wrap items-center gap-1 text-sm bg-gray-50 p-2 rounded border">
+          <div className="flex flex-wrap items-center gap-1 text-sm bg-[var(--color-tertiary)] p-2 rounded border border-[var(--color-secondary)]">
             {value.map((file, index) => (
               <span key={index} className="flex items-center">
                 <span className="text-gray-700 max-w-[100px] truncate text-xs">

@@ -7,8 +7,8 @@ const ThemeContext = createContext();
 
 // Catalyst API endpoints
 const CATALYST_API = {
-  get: "https://first-test-10103020174.development.catalystappsail.com/theme",
-  update: "https://first-test-10103020174.development.catalystappsail.com/theme",
+  get: "https://appsailmockdata-10102165915.development.catalystappsail.com/api/theme",
+  update: "https://appsailmockdata-10102165915.development.catalystappsail.com/api/theme",
 };
 
 // Default colors

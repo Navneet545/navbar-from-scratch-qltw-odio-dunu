@@ -105,25 +105,26 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm mb-1">{label}</label>
-      <div className="border border-[var(--border-color)] rounded-lg p-2 bg-white inline-block">
-            <canvas
-            ref={canvasRef}
-            onMouseDown={startDrawing}
-            onMouseMove={draw}
-            onMouseUp={stopDrawing}
-            onMouseLeave={stopDrawing}
-            onTouchStart={startDrawing}
-            onTouchMove={draw}
-            onTouchEnd={stopDrawing}
-            className="border border-gray-300 cursor-crosshair bg-white"
-            style={{
-                width: `${canvasWidth}px`,
-                height: `${canvasHeight}px`,
-                touchAction: 'none'
-            }}
-            />
-            <div className="flex justify-between items-center mt-1">
+      <div className='flex'>
+        <label className="text-sm mb-1 w-34">{label}</label>
+        <div className="border border-[var(--border-color)] rounded-lg p-2 bg-white inline-block">
+          <canvas
+          ref={canvasRef}
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={stopDrawing}
+          onMouseLeave={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
+          className="border border-gray-300 cursor-crosshair bg-white"
+          style={{
+              width: `${canvasWidth}px`,
+              height: `${canvasHeight}px`,
+              touchAction: 'none'
+          }}
+          />
+          <div className="flex justify-between items-center mt-1">
             <button
                 type="button"
                 onClick={clearSignature}
@@ -134,7 +135,8 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
             {signatureData && (
                 <span className="text-green-500 text-xs">✓ Signed</span>
             )}
-            </div>
+          </div>
+        </div>
       </div>
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
       
@@ -144,7 +146,7 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
           <img 
             src={signatureData} 
             alt="Signature" 
-            className="border border-gray-300 max-w-[150px] max-h-[60px]"
+            className="border border-gray-300 w-full max-h-[60px] bg-white"
           />
         </div>
       )}
