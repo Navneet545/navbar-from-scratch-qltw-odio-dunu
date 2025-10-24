@@ -107,7 +107,7 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
     <div className="flex flex-col">
       <div className='flex'>
         <label className="text-sm mb-1 w-34">{label}</label>
-        <div className="border border-[var(--border-color)] rounded-lg p-2 bg-white inline-block">
+        <div className="border border-[var(--border-color)] rounded-lg p-2 bg-[var(--background)] inline-block">
           <canvas
           ref={canvasRef}
           onMouseDown={startDrawing}

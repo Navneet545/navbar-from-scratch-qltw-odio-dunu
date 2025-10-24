@@ -66,7 +66,7 @@ if (type === "radio") {
                 value={option.value}
                 checked={value === option.value}
                 onChange={onChange}
-                className="h-4 w-4 accent-[var(--color-primary)]"
+                className="h-4 w-4 accent-[var(--color-secondary)]"
               />
               <span className="text-sm">{option.label}</span>
             </label>

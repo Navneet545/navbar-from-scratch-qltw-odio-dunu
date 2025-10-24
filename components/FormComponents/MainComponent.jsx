@@ -7,6 +7,7 @@ import FormTextarea from "./FormTextarea";
 import AudioUpload from "./AudioUpload";
 import VideoUpload from "./VideoUpload";
 import CompactDocumentUpload from "./FormFileUpload";
+import SubForm from "./subform";
 
 // Sample data for dropdowns
 const COUNTRIES = [
@@ -437,7 +438,7 @@ export default function DonationForm() {
             name="image"
             accept="image/*"
             onChange={handleInputChange}
-            className={`w-full border rounded-lg p-2 ${
+            className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
               errors.image ? "border-red-500" : "border-[var(--border-color)]"
             }`}
           />
@@ -507,6 +508,14 @@ export default function DonationForm() {
           value={formData.signature}
           onChange={handleSignatureChange}
           error={errors.signature}
+        />
+      </div>
+
+      <div className="col-span-full ">
+        <SubForm
+        formData={formData}
+        onChange={handleInputChange}
+        errors={errors}
         />
       </div>
 

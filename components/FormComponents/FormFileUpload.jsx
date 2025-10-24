@@ -38,7 +38,7 @@ export default function CompactDocumentUpload({
           multiple
           accept=".pdf,.doc,.docx,.txt,.rtf"
           onChange={handleFileChange}
-          className={`w-full border rounded-lg p-2 ${
+          className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
             error ? "border-red-500" : "border-[var(--border-color)]"
           }`}
         />

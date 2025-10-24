@@ -30,7 +30,7 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
           type="file"
           accept={accept}
           onChange={handleFileChange}
-          className={`w-full border rounded-lg p-2 ${
+          className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
             error ? "border-red-500" : "border-[var(--border-color)]"
           }`}
         />
