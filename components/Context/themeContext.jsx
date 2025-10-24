@@ -57,12 +57,13 @@ export function ThemeProvider({ children }) {
 
       // Then fetch from API
       const response = await axios.get(CATALYST_API.get);
-      const result = response.data;
+      const data = response.data;
 
-      console.log("API Response:", result);
+      console.log("API Response:", data);
       
-      if (result && result.length > 0) {
-        const themeData = result[0].Theme;
+      if (data) {
+        const themeData = data.result[0].Theme;
+        console.log(themeData);
         
         const newColors = {
           primary: themeData?.primaryColor || DEFAULT_COLORS.primary,
