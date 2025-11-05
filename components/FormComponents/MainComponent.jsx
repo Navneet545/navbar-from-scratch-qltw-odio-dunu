@@ -7,7 +7,7 @@ import FormTextarea from "./FormTextarea";
 import AudioUpload from "./AudioUpload";
 import VideoUpload from "./VideoUpload";
 import CompactDocumentUpload from "./FormFileUpload";
-import SubForm from "./subform";
+import AdditionalDetailsSubForm from "./Subform";
 
 // Sample data for dropdowns
 const COUNTRIES = [
@@ -512,7 +512,7 @@ export default function DonationForm() {
       </div>
 
       <div className="col-span-full ">
-        <SubForm
+        <AdditionalDetailsSubForm
         formData={formData}
         onChange={handleInputChange}
         errors={errors}
