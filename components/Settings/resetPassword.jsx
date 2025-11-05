@@ -4,6 +4,33 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import {newPasswordSchema} from '../../lib/validationSchema';
+
+// Password Input Component with Eye Icon
+  const PasswordInput = ({ 
+    value, 
+    onChange, 
+    placeholder, 
+    showPassword, 
+    setShowPassword 
+  }) => (
+    <div className="relative mb-3">
+      <input
+        type={showPassword ? "text" : "password"}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="w-full px-3 py-2 rounded-lg border pr-10"
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+      >
+        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+      </button>
+    </div>
+  );
 
 export default function PasswordSettings() {
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -123,12 +150,13 @@ export default function PasswordSettings() {
       setLoading(true);
       setMessage("");
 
-      const response = await axios.post(
-        `https://your-api.com/api/user/send-otp`,
-        { email }
+      const response5 = await axios.post(
+        `https://appsailmockdata-10102165915.development.catalystappsail.com/api/userList/generateOTPOLD`,
+        { Email: email }
       );
+      console.log(response5);
 
-      if (response.data.success) {
+      if (response5.status === 200 && response5.data) {
         setPasswordStep(2);
         setMessage("OTP sent to your email");
       } else {
@@ -141,32 +169,6 @@ export default function PasswordSettings() {
       setLoading(false);
     }
   };
-
-  // Password Input Component with Eye Icon
-  const PasswordInput = ({ 
-    value, 
-    onChange, 
-    placeholder, 
-    showPassword, 
-    setShowPassword 
-  }) => (
-    <div className="relative mb-3">
-      <input
-        type={showPassword ? "text" : "password"}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className="w-full px-3 py-2 rounded-lg border pr-10"
-      />
-      <button
-        type="button"
-        onClick={() => setShowPassword(!showPassword)}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-      >
-        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-      </button>
-    </div>
-  );
 
   return (
     <>

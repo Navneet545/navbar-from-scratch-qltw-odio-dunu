@@ -4,8 +4,6 @@ import { useState } from "react";
 import AuthForm from "@/components/auth/AuthForm";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import CryptoJS from "crypto-js";
-import jwtDecode from "jwt-decode"; 
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -30,7 +28,6 @@ export default function LoginPage() {
 
           localStorage.setItem('token', token);
           // localStorage.setItem('user', JSON.stringify(decoded));
-
           router.push('/dashboard');
         }
         
@@ -63,7 +60,6 @@ export default function LoginPage() {
       return null;
     }
   }
-
 
   return (
     <div className="flex justify-center items-start mt-0 pt-0 bg-[var(--background)] text-[var(--foreground)] px-4">

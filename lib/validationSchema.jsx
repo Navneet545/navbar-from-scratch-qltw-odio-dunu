@@ -33,3 +33,7 @@ export const loginSchema = yup.object({
   email: emailSchema,
   password: passwordSchema,
 });
+
+export const newPasswordSchema = yup.object({
+  Password: passwordSchema,
+});
