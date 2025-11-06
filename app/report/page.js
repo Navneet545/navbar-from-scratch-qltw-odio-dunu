@@ -1,5 +1,5 @@
 import React from 'react'
-import ReportTable from '../../components/ReportTable/reporttable'
+import ReportTable from '../../components/ReportTable/Report'
 
 const page = () => {
   return (
@@ -7,7 +7,7 @@ const page = () => {
       {/* Content Area */}
         <main className="flex-grow w-full mx-auto px-0 py-2">
             <div className="bg-background text-foreground">
-                </ReportTable>
+                <ReportTable/>
             </div>
         </main>
 
