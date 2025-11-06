@@ -1,21 +1,18 @@
 "use client";
 import React from "react";
 
-export default function FormCheckbox({ label, name, value, checked, onChange, error }) {
+export default function FormCheckbox({ label, name, value, checked, onChange }) {
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center space-x-2">
-        <input 
-        type="checkbox" 
+    <label className="flex items-center space-x-2 gap-2 text-sm cursor-pointer">
+      <input 
+        type="checkbox"
         name={name}
         value={value}
         checked={checked}
         onChange={onChange}
-        className="h-4 w-4 accent-[var(--color-secondary)]"
+        className="h-4 w-4 accent-[var(--color-secondary)] cursor-pointer"
       />
-      <label className="text-sm">{label}</label>
-      </div>
-      {/* {error && <p className="text-xs text-red-500 mt-1 w-full">{error}</p>} */}
-    </div>
+      {label}
+    </label>
   );
 }

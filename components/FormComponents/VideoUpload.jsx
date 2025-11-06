@@ -21,8 +21,14 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex">
+    <div className="flex flex-col"
+    style={{
+        width: "100%",
+      }}>
+      <div className="flex justify-center items-center gap-20"
+      style={{
+        width: "90%",
+      }}>
         <label className="text-sm mb-1 w-34">{label}</label>
       
         <input
@@ -30,7 +36,7 @@ export default function VideoUpload({ label, name, value, onChange, error, accep
           type="file"
           accept={accept}
           onChange={handleFileChange}
-          className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
+          className={`w-full border rounded-lg p-1 bg-[var(--background)] ${
             error ? "border-red-500" : "border-[var(--border-color)]"
           }`}
         />

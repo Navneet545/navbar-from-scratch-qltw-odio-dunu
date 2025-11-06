@@ -79,6 +79,18 @@ body {
   background-color: var(--hover-bg);
 }
 
+input:hover, 
+textarea:hover, 
+select:hover {
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 4px var(--color-secondary);
+  transition: 0.2s ease-in-out;
+}
+
+/* input[type="date"] {
+  width: 100% !important;
+} */
+
 
 /* Keyframes for hover scroll */
 @keyframes scroll-text {

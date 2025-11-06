@@ -104,40 +104,47 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className='flex'>
+    <div className="flex flex-col"
+      style={{ width: "100%" }}
+    >
+      <div
+        className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-3 sm:gap-7"
+        style={{ width: "90%" }}
+      >
         <label className="text-sm mb-1 w-34">{label}</label>
-        <div className="border border-[var(--border-color)] rounded-lg p-2 bg-[var(--background)] inline-block">
+        
+        <div className="border border-[var(--border-color)] rounded-lg p-1 bg-[var(--background)] inline-block">
           <canvas
-          ref={canvasRef}
-          onMouseDown={startDrawing}
-          onMouseMove={draw}
-          onMouseUp={stopDrawing}
-          onMouseLeave={stopDrawing}
-          onTouchStart={startDrawing}
-          onTouchMove={draw}
-          onTouchEnd={stopDrawing}
-          className="border border-gray-300 cursor-crosshair bg-white"
-          style={{
+            ref={canvasRef}
+            onMouseDown={startDrawing}
+            onMouseMove={draw}
+            onMouseUp={stopDrawing}
+            onMouseLeave={stopDrawing}
+            onTouchStart={startDrawing}
+            onTouchMove={draw}
+            onTouchEnd={stopDrawing}
+            className="border border-gray-300 cursor-crosshair bg-white"
+            style={{
               width: `${canvasWidth}px`,
               height: `${canvasHeight}px`,
               touchAction: 'none'
-          }}
+            }}
           />
           <div className="flex justify-between items-center mt-1">
             <button
-                type="button"
-                onClick={clearSignature}
-                className="px-2 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600"
+              type="button"
+              onClick={clearSignature}
+              className="px-2 py-1 text-xs bg-gray-500 text-white rounded hover:bg-gray-600"
             >
-                Clear
+              Clear
             </button>
             {signatureData && (
-                <span className="text-green-500 text-xs">✓ Signed</span>
+              <span className="text-green-500 text-xs">✓ Signed</span>
             )}
           </div>
         </div>
       </div>
+
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
       
       {signatureData && (

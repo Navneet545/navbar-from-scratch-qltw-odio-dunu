@@ -189,7 +189,7 @@ const Page = () => {
     },
     {
       name: "Forms",
-      path: "/forms",
+      path: "/form",
     },
     {
       name: "Analytic-Analytic-Analytic-Analytic",

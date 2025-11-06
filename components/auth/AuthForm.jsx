@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, UserPlus, LogIn, AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { signUpSchema, loginSchema } from "../../lib/validationSchema";
+import { signUpSchema } from "../../lib/validationSchema"; // loginSchema removed
 import Image from "next/image";
 import logo from "../../public/truactlogo.png";
 import ForgotPasswordModal from "../ForgetPassword/forgetPassword"; // Import the modal
@@ -25,36 +25,42 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }));
+    setForm((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleBlur = (e) => {
     const { name } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    validateField(name, form[name]);
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    if (isSignUp) validateField(name, form[name]); // only validate on signup
   };
 
   const validateField = async (fieldName, value) => {
-    const schema = isSignUp ? signUpSchema : loginSchema;
+    if (!isSignUp) return; // skip validation for login mode
     try {
-      await schema.validateAt(fieldName, { [fieldName]: value });
-      setErrors(prev => ({ ...prev, [fieldName]: "" }));
+      await signUpSchema.validateAt(fieldName, { [fieldName]: value });
+      setErrors((prev) => ({ ...prev, [fieldName]: "" }));
     } catch (error) {
-      setErrors(prev => ({ ...prev, [fieldName]: error.message }));
+      setErrors((prev) => ({ ...prev, [fieldName]: error.message }));
     }
   };
 
   const validateForm = async () => {
-    const schema = isSignUp ? signUpSchema : loginSchema;
+    if (!isSignUp) {
+      setErrors({});
+      return true; // Skip login validation entirely
+    }
     try {
-      const dataToValidate = isSignUp ? form : { email: form.email, password: form.password };
-      await schema.validate(dataToValidate, { abortEarly: false });
+      await signUpSchema.validate(form, { abortEarly: false });
       setErrors({});
       return true;
     } catch (error) {
       const newErrors = {};
-      error.inner.forEach(err => { newErrors[err.path] = err.message; });
+      if (error && error.inner && Array.isArray(error.inner)) {
+        error.inner.forEach((err) => {
+          if (err.path) newErrors[err.path] = err.message;
+        });
+      }
       setErrors(newErrors);
       return false;
     }
@@ -62,25 +68,32 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const fieldsToTouch = isSignUp ? ['firstName','lastName','email','password'] : ['email','password'];
+    const fieldsToTouch = isSignUp
+      ? ["firstName", "lastName", "email", "password"]
+      : ["email", "password"];
     const newTouched = {};
-    fieldsToTouch.forEach(f => newTouched[f] = true);
+    fieldsToTouch.forEach((f) => (newTouched[f] = true));
     setTouched(newTouched);
 
-    const isValid = await validateForm();
+    const isValid = isSignUp ? await validateForm() : true; // skip validation on login
     if (!isValid) return;
 
     if (onSubmit) {
-      const submitData = isSignUp ? form : { email: form.email, password: form.password };
+      const submitData = isSignUp
+        ? form
+        : { email: form.email, password: form.password };
       onSubmit(submitData);
     }
   };
 
   const getFieldError = (fieldName) => touched[fieldName] && errors[fieldName];
   const getInputClassName = (fieldName) => {
-    const base = "w-full px-3 py-2 rounded-lg border text-[var(--foreground)] bg-[var(--background)] transition-all duration-200";
-    const errorClass = "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-opacity-30";
-    const normalClass = "focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:ring-opacity-30 hover:border-[var(--color-secondary)]";
+    const base =
+      "w-full px-3 py-2 rounded-lg border text-[var(--foreground)] bg-[var(--background)] transition-all duration-200";
+    const errorClass =
+      "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-opacity-30";
+    const normalClass =
+      "focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:ring-opacity-30 hover:border-[var(--color-secondary)]";
     return `${base} ${getFieldError(fieldName) ? errorClass : normalClass}`;
   };
 
@@ -104,7 +117,11 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
 
         {/* Header */}
         <div className="flex flex-col items-center">
-          {isSignUp ? <UserPlus className="w-5 h-5 text-[var(--color-secondary)] mb-2" /> : <LogIn className="w-5 h-5 text-[var(--color-secondary)] mb-2" />}
+          {isSignUp ? (
+            <UserPlus className="w-5 h-5 text-[var(--color-secondary)] mb-2" />
+          ) : (
+            <LogIn className="w-5 h-5 text-[var(--color-secondary)] mb-2" />
+          )}
           <h1 className="text-2xl font-semibold">{isSignUp ? "Create Account" : "Login"}</h1>
           <p className="text-sm text-[var(--muted-foreground)] mt-1">{isSignUp ? "Join us!!" : "Welcome back!"}</p>
         </div>
@@ -113,7 +130,7 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
         <form onSubmit={handleSubmit} className="space-y-4 mt-4" noValidate>
           {isSignUp && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {["firstName", "lastName"].map(field => (
+              {["firstName", "lastName"].map((field) => (
                 <div key={field}>
                   <label className="block text-sm mb-1">{field === "firstName" ? "First Name" : "Last Name"}</label>
                   <input
@@ -126,7 +143,8 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
                   />
                   {getFieldError(field) && (
                     <div className="flex items-center mt-1 text-red-500 text-xs">
-                      <AlertCircle size={12} className="mr-1" />{errors[field]}
+                      <AlertCircle size={12} className="mr-1" />
+                      {errors[field]}
                     </div>
                   )}
                 </div>
@@ -146,7 +164,8 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
             />
             {getFieldError("email") && (
               <div className="flex items-center mt-1 text-red-500 text-xs">
-                <AlertCircle size={12} className="mr-1" />{errors.email}
+                <AlertCircle size={12} className="mr-1" />
+                {errors.email}
               </div>
             )}
           </div>
@@ -197,18 +216,19 @@ export default function AuthForm({ mode = "signup", onSubmit, loading = false })
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-[var(--muted-foreground)]">
           {isSignUp ? (
-            <>Already have an account? <Link href="/login" className="text-[var(--color-secondary)] hover:underline">Log in</Link></>
+            <>
+              Already have an account? <Link href="/login" className="text-[var(--color-secondary)] hover:underline">Log in</Link>
+            </>
           ) : (
-            <>Don't have an account? <Link href="/signUp" className="text-[var(--color-secondary)] hover:underline">Sign up</Link></>
+            <>
+              Don't have an account? <Link href="/signUp" className="text-[var(--color-secondary)] hover:underline">Sign up</Link>
+            </>
           )}
         </div>
       </motion.div>
 
       {/* Forgot Password Modal */}
-      <ForgotPasswordModal 
-        isOpen={showForgotPassword} 
-        onClose={() => setShowForgotPassword(false)} 
-      />
+      <ForgotPasswordModal isOpen={showForgotPassword} onClose={() => setShowForgotPassword(false)} />
     </>
   );
 }

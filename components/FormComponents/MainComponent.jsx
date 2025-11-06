@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import FormInput from "./FormInput";
-import FormCheckbox from "./FormCheckbox";
+import FormCheckboxGroup from "./FormCheckboxGroup";
 import SignaturePad from "./SignaturePad";
 import FormTextarea from "./FormTextarea";
 import AudioUpload from "./AudioUpload";
@@ -145,6 +145,31 @@ export default function DonationForm() {
 
   const [errors, setErrors] = useState({});
 
+  // ✅ Additional Details Rows State
+  const [additionalRows, setAdditionalRows] = useState([
+    { company:"", jobTitle:"", department:"", employeeId:"", workPhone:"" }
+  ]);
+
+  // ✅ Add Row
+  const handleAddRow = () => {
+    setAdditionalRows([
+      ...additionalRows,
+      { company:"", jobTitle:"", department:"", employeeId:"", workPhone:"" }
+    ]);
+  };
+
+  // ✅ Delete Row
+  const handleDeleteRow = (index) => {
+    setAdditionalRows(rows => rows.filter((_, i) => i !== index));
+  };
+
+  // ✅ Update Row Field
+  const handleSubFormChange = (rowIdx, field, value) => {
+    const updated = [...additionalRows];
+    updated[rowIdx][field] = value;
+    setAdditionalRows(updated);
+  };
+
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
     
@@ -184,6 +209,23 @@ export default function DonationForm() {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
   };
+
+  const handleAdditionalDetailsChange = (index, field, value) => {
+  const updated = [...formData.additionalDetails];
+  updated[index][field] = value;
+  setFormData(prev => ({ ...prev, additionalDetails: updated }));
+};
+
+const addAdditionalRow = () => {
+  setFormData(prev => ({
+    ...prev,
+    additionalDetails: [
+      ...prev.additionalDetails,
+      { company: "", jobTitle: "", department: "", employeeId: "", workPhone: "" }
+    ]
+  }));
+};
+
 
   // CORRECTED validateForm function
   const validateForm = () => {
@@ -301,10 +343,12 @@ export default function DonationForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-6 rounded-lg shadow-md"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-6 rounded-lg shadow-md w-full"
       style={{
-        backgroundColor: "var(--hover-bg)",
-        borderColor: "var(--border-all)",
+        borderColor: "var(--border-color)",
+        color: "var(--foreground)",
+        backgroundColor: "var(--background)",
+        boxShadow: "0px 0px 8px 2px var(--shadow-color)",
       }}
     >
       {/* Basic Info */}
@@ -395,6 +439,7 @@ export default function DonationForm() {
         value={formData.date}
         onChange={handleInputChange}
         error={errors.date}
+        className="w-full min-w-0"
       />
       
       <FormInput 
@@ -408,30 +453,25 @@ export default function DonationForm() {
       />
 
       {/* Donation Scheme */}
-      <div className="flex flex-col">
-        <div className="flex">
-          <p className="text-sm font-semibold mb-2 w-34">Donation Schemes *</p>
-          <div className="grid grid-cols-2 gap-2 w-full">
-            {["Education", "Health", "Environment", "Animal Welfare"].map((scheme) => (
-              <FormCheckbox
-                key={scheme}
-                label={scheme}
-                name="donationSchemes"
-                value={scheme}
-                checked={formData.donationSchemes.includes(scheme)}
-                onChange={handleInputChange}
-              />
-            ))}
-          </div>
-        </div>
-        {errors.donationSchemes && (
-          <p className="text-xs text-red-500 mt-1">{errors.donationSchemes}</p>
-        )}
-      </div>
+      <FormCheckboxGroup
+        label="Donation Schemes *"
+        name="donationSchemes"
+        options={["Sports", "Health"]}
+        value={formData.donationSchemes}
+        onChange={handleInputChange}
+        error={errors.donationSchemes}
+      />
+
 
       {/* File Uploads */}
-      <div className="flex flex-col">
-        <div className="flex">
+      <div className="flex flex-col"
+      style={{
+        width: "100%",
+      }}>
+        <div className="flex justify-center items-center gap-20"
+        style={{
+        width: "90%",
+      }}>
           <label className="text-sm mb-1 w-34">Upload Image *</label>
           <input
             type="file"
@@ -511,11 +551,13 @@ export default function DonationForm() {
         />
       </div>
 
-      <div className="col-span-full ">
+      <div className="col-span-full">
         <AdditionalDetailsSubForm
-        formData={formData}
-        onChange={handleInputChange}
-        errors={errors}
+          rows={additionalRows}
+          onFieldChange={handleSubFormChange}
+          onAddRow={handleAddRow}
+          onDeleteRow={handleDeleteRow}
+          errors={errors}
         />
       </div>
 
@@ -534,12 +576,16 @@ export default function DonationForm() {
       </div>
       {errors.terms && <p className="text-xs text-red-500 col-span-full">{errors.terms}</p>}
 
-      <button
-        type="submit"
-        className="py-2 mt-4 rounded-lg bg-[var(--color-secondary)] text-[var(--color-on-secondary)] hover:bg-[var(--color-secondary-hover)] transition col-span w-30"
-      >
-        Submit
-      </button>
+      {/* Sticky Submit Button */}
+      <div className="fixed bottom-14 md:bottom-10 right-10 md:right-10 z-50">
+        <button
+          type="submit"
+          className="px-6 py-3 rounded-lg bg-[var(--color-secondary)] text-[var(--color-on-secondary)] hover:bg-[var(--color-secondary-hover)] transition shadow-lg font-semibold"
+        >
+          Submit
+        </button>
+      </div>
+
     </form>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReportTable from '../../components/ReportTable/reporttable'
 
 const page = () => {
   return (
@@ -6,9 +7,7 @@ const page = () => {
       {/* Content Area */}
         <main className="flex-grow w-full mx-auto px-0 py-2">
             <div className="bg-background text-foreground">
-                <p>
-                    this is Report
-                </p>
+                </ReportTable>
             </div>
         </main>
 

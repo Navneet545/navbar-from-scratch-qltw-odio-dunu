@@ -21,8 +21,14 @@ export default function FormTextarea({
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex">
+    <div className="flex flex-col"
+    style={{
+        width: "100%",
+      }}>
+      <div className="flex justify-center items-center gap-20"
+      style={{
+        width: "90%",
+      }}>
         <label className="text-sm mb-1 w-34">{label}</label>
         <textarea
           name={name}
@@ -31,7 +37,7 @@ export default function FormTextarea({
           rows={rows}
           cols={cols}
           placeholder={placeholder}
-          className={`w-full px-3 py-2 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
+          className={`w-full px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
             resizeClasses[resize]
           } ${
             error ? "border-red-500" : "border-[var(--border-color)]"

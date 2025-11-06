@@ -4,17 +4,24 @@ import React from "react";
 export default function FormInput({ label, name, value, onChange, error, type = "text", options = [], showUrlHint = true, ...rest }) {
   if (type === "select") {
     return (
-      <div className="flex flex-col">
-        <div className="flex">
+      <div className="flex flex-col"
+      style={{
+        width: "100%",
+      }}>
+        <div className="flex justify-center items-center gap-20"
+        style={{
+        width: "90%",
+      }}>
           <label className="text-sm mb-1 w-34">{label}</label>
           <select
             name={name}
             value={value}
             onChange={onChange}
-            className={`w-full px-3 py-2 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
-              error ? "border-red-500" : "border-[var(--border-color)]"
-            }`}
+            className={`w-full max-w-[250px] px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] 
+            focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] 
+            ${error ? "border-red-500" : "border-[var(--border-color)]"}`}
           >
+
             <option value="">Select {label}</option>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -52,31 +59,45 @@ export default function FormInput({ label, name, value, onChange, error, type = 
   //   );
   // }
   // In your FormInput component, update the radio section:
-if (type === "radio") {
-  return (
-    <div className="flex flex-col">
-      <div className="flex">
-        <label className="text-sm mb-1 w-34">{label}</label>
-        <div className="flex space-x-4 w-full">
-          {options.map((option) => (
-            <label key={option.value} className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name={name}
-                value={option.value}
-                checked={value === option.value}
-                onChange={onChange}
-                className="h-4 w-4 accent-[var(--color-secondary)]"
-              />
-              <span className="text-sm">{option.label}</span>
-            </label>
-          ))}
+// RADIO INPUT
+  if (type === "radio") {
+    return (
+      <div className="flex flex-col" style={{ width: "100%" }}>
+        <div
+          className="flex justify-center items-center gap-20"
+          style={{ width: "90%" }}
+        >
+          {/* Label */}
+          <label className="text-sm mb-1 w-34">{label}</label>
+
+          {/* Radio Group */}
+          <div className="flex flex-wrap gap-4 w-full">
+            {options.map((option) => (
+              <label
+                key={option.value}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name={name}
+                  value={option.value}
+                  checked={value === option.value}
+                  onChange={onChange}
+                  className="h-4 w-4 accent-[var(--color-secondary)] cursor-pointer
+                            hover:scale-110 transition-transform"
+                />
+                <span className="text-sm">{option.label}</span>
+              </label>
+            ))}
+          </div>
         </div>
+
+        {/* Error */}
+        {error && <p className="text-xs text-red-500 mt-1 w-full">{error}</p>}
       </div>
-      {error && <p className="text-xs text-red-500 mt-1 w-full">{error}</p>}
-    </div>
-  );
-}
+    );
+  }
+
 
 // Handle URL type that accepts simple domains like "google.com"
   if (type === "url") {
@@ -95,10 +116,16 @@ if (type === "radio") {
     const isUrlValid = value ? isValidSimpleUrl(value) : true;
 
     return (
-      <div className="flex flex-col">
-        <div className="flex">
+      <div className="flex flex-col"
+      style={{
+        width: "100%",
+      }}>
+        <div className="flex justify-center items-center gap-20"
+        style={{
+        width: "90%",
+      }}>
           <label className="text-sm mb-1 w-34">{label}</label>
-          <div className="relative">
+          {/* <div className="relative"> */}
             <input
               type="text" // Use text instead of url to avoid browser validation
               name={name}
@@ -107,7 +134,7 @@ if (type === "radio") {
               inputMode="url"
               autoComplete="url"
               placeholder="google.com or example.com"
-              className={`w-full px-3 py-2 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
+              className={`w-full px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
                 error ? "border-red-500" : 
                 !isUrlValid && value ? "border-orange-500" : "border-[var(--border-color)]"
               }`}
@@ -123,7 +150,7 @@ if (type === "radio") {
                 ⚠
               </div>
             )}
-          </div>
+          {/* </div> */}
         </div>
         {error && <p className="text-xs text-red-500 mt-1 w-full">{error}</p>}
         {!isUrlValid && value && (
@@ -137,8 +164,14 @@ if (type === "radio") {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="flex">
+    <div className="flex flex-col"
+    style={{
+        width: "100%",
+      }}>
+      <div className="flex justify-center items-center gap-20"
+      style={{
+        width: "90%",
+      }}>
         <label className="text-sm mb-1 w-34">{label}</label>
         <input
           type={type}
@@ -146,7 +179,7 @@ if (type === "radio") {
           value={value}
           onChange={onChange}
           {...rest}
-          className={`w-full px-3 py-2 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
+          className={`w-full px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] ${
             error ? "border-red-500" : "border-[var(--border-color)]"
           }`}
         />
