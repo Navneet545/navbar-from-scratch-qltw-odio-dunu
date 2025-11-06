@@ -17,7 +17,7 @@ export default function FormInput({ label, name, value, onChange, error, type = 
             name={name}
             value={value}
             onChange={onChange}
-            className={`w-full max-w-[250px] px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] 
+            className={`w-full px-3 py-1 border rounded-lg bg-[var(--background)] text-[var(--foreground)] 
             focus:outline-none focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)] 
             ${error ? "border-red-500" : "border-[var(--border-color)]"}`}
           >

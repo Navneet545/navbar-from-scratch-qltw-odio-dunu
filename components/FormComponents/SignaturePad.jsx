@@ -108,12 +108,12 @@ export default function SignaturePad({ label, name, value, onChange, error }) {
       style={{ width: "100%" }}
     >
       <div
-        className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-3 sm:gap-7"
+        className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-25 sm:gap-7"
         style={{ width: "90%" }}
       >
         <label className="text-sm mb-1 w-34">{label}</label>
         
-        <div className="border border-[var(--border-color)] rounded-lg p-1 bg-[var(--background)] inline-block">
+        <div className="border border-[var(--border-color)] rounded-lg p-1 bg-[var(--background)] inline-block w-full gap-5">
           <canvas
             ref={canvasRef}
             onMouseDown={startDrawing}
