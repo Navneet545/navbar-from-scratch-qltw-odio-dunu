@@ -57,7 +57,7 @@ export default function AdvancedReportTable() {
         />
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-[var(--border-color)]">
+      <div className="overflow-x-auto overflow-y-auto max-h-[70vh] rounded-lg border border-[var(--border-color)]">
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr
@@ -101,6 +101,27 @@ export default function AdvancedReportTable() {
                     {user.name}
                   </span>
                 </td>
+                {/* ✅ IMAGE + NAME (Responsive) */}
+                {/* <td className="p-3 text-left align-middle">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                    
+                    <div className="h-10 w-10 rounded-full overflow-hidden border border-[var(--border-color)] shadow-sm 
+                      transition group-hover:ring-2 group-hover:ring-[var(--color-secondary)] group-hover:scale-110">
+                      <Image 
+                        src={user.image}
+                        alt="User"
+                        width={40}
+                        height={40}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+
+                    
+                    <span className="font-medium group-hover:text-[var(--color-secondary)] hover:scale-[1.03] transition cursor-pointer">
+                      {user.name}
+                    </span>
+                  </div>
+                </td> */}
 
                 {/* EMAIL */}
                 <td className="p-3 text-left opacity-80 group-hover:text-[var(--color-secondary)] hover:opacity-100 hover:scale-[1.03] cursor-pointer transition">

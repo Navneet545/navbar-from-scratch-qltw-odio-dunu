@@ -37,18 +37,21 @@ export default function AdditionalDetailsSubForm({ rows, onFieldChange, onAddRow
             ✕
           </button>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {Object.keys(row).map((field) => (
-              <FormInput
-                key={field}
-                label={field.replace(/([A-Z])/g, " $1")}
-                name={field}
-                value={row[field] || ""}
-                onChange={(e) => onFieldChange(index, field, e.target.value)}
-                error={errors?.additionalDetails?.[index]?.[field]}
-                placeholder={field}
-              />
-            ))}
+          <div className="overflow-x-auto">
+            <div className="grid grid-cols-5 gap-4 min-w-max py-2">
+              {Object.keys(row).map((field) => (
+                <div key={field} className="min-w-[160px]">
+                  <FormInput
+                    label={field.replace(/([A-Z])/g, " $1")}
+                    name={field}
+                    value={row[field] || ""}
+                    onChange={(e) => onFieldChange(index, field, e.target.value)}
+                    error={errors?.additionalDetails?.[index]?.[field]}
+                    placeholder={field}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ))}
