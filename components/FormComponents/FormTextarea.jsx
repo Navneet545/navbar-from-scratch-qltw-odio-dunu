@@ -23,11 +23,11 @@ export default function FormTextarea({
   return (
     <div className="flex flex-col"
     style={{
-        width: "100%",
+        width: "90%",
       }}>
       <div className="flex justify-center items-center gap-20"
       style={{
-        width: "90%",
+        width: "100%",
       }}>
         <label className="text-sm mb-1 w-34">{label}</label>
         <textarea

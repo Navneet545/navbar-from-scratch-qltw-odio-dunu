@@ -19,7 +19,7 @@ export default function AdditionalDetailsSubForm({ rows, onFieldChange, onAddRow
       {rows.map((row, index) => (
         <div
           key={index}
-          className="relative border-2 border-gray-200 rounded-lg p-6 mb-4"
+          className="relative border-2 border-gray-200 rounded-lg p-2 mb-4"
           style={{
             borderColor: "var(--border-color)",
             color: "var(--foreground)",

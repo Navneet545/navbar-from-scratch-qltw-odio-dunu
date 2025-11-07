@@ -188,6 +188,10 @@ const Page = () => {
       path: "/analytics",
     },
     {
+      name: "Reports",
+      path: "/report",
+    },
+    {
       name: "Forms",
       path: "/form",
     },
@@ -918,106 +922,109 @@ const Page = () => {
 
         {/* =============== Mobile Menu =============== */}
         {isMobileMenuOpen && (
-          <div
-            className="md:hidden bg-background px-4 py-4 space-y-4 text-sm font-medium"
-            style={{
-              borderTopColor: "var(--border-top)",
-              height: "calc(100vh - 64px - 40px)",
-            }}
-          >
-            {/* Top Row: Search + Settings */}
-            <div className="flex items-center gap-3">
-              {/* Search should take most space */}
-              <div className="flex-1 min-w-0">
-                <SearchBar />
-              </div>
-
-              {/* Settings button */}
-              <div className="relative shrink-0" ref={settingsRef}>
-                <button
-                  onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-                  className="p-2 rounded-full hover:bg-[var(--hover-bg)] transition"
-                >
-                  <Settings className="h-5 w-5" />
-                </button>
-
-                {isSettingsOpen && (
-                  <div
-                    className="absolute right-0 mt-2 w-48 bg-background rounded-xl py-2 z-50"
-                    style={{ boxShadow: "var(--dropdown-shadow)" }}
-                  >
-                    <Link
-                      href="/support"
-                      className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]"
-                    >
-                      <Cable className="h-4 w-4 shrink-0" />
-                      <span>Support</span>
-                    </Link>
-                    <Link
-                      href="/accountSettings"
-                      className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]"
-                    >
-                      <ShieldUser className="h-4 w-4 shrink-0" />
-                      <span>Account Settings</span>
-                    </Link>
-                    {/* Only for admin */}
-                    {isAdmin && (
-                      <Link
-                        href="/appSettings"
-                        className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]"
-                      >
-                        <BadgeAlert className="h-4 w-4 shrink-0" />
-                        <span>App Settings</span>
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
+        <div
+          className="md:hidden bg-background px-4 py-4 space-y-4 text-sm font-medium"
+          style={{
+            borderTopColor: "var(--border-top)",
+            height: "calc(100vh - 64px - 40px)",
+          }}
+        >
+          {/* Top Row: Search + Settings */}
+          <div className="flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <SearchBar />
             </div>
 
-            {/* Mobile Modules */}
-            <div
-              className="overflow-y-auto max-h-[calc(100vh-64px-38px)] px-4 py-4 space-y-4"
-              onWheel={(e) => {
-                const el = e.currentTarget;
-                const atTop = el.scrollTop === 0 && e.deltaY < 0;
-                const atBottom =
-                  el.scrollHeight - el.scrollTop === el.clientHeight &&
-                  e.deltaY > 0;
-                if (atTop || atBottom) e.preventDefault(); // prevent body scroll
-              }}
-              onTouchMove={(e) => e.stopPropagation()} // mobile
-            >
-              {navItems.map((item) => {
-                 // Check if any subItem of this module is active
-                  const isModuleActive = item.headings?.some(heading => 
-                    heading.subItems?.some(sub => pathname === sub.path)
-                  ) || item.subItems?.some(sub => pathname === sub.path);
-                return (
+            {/* Settings Button */}
+            <div className="relative shrink-0" ref={settingsRef}>
+              <button
+                onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+                className="p-2 rounded-full hover:bg-[var(--hover-bg)] transition"
+              >
+                <Settings className="h-5 w-5" />
+              </button>
+
+              {isSettingsOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-background rounded-xl py-2 z-50"
+                  style={{ boxShadow: "var(--dropdown-shadow)" }}
+                >
+                  <Link href="/support" className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]">
+                    <Cable className="h-4 w-4 shrink-0" />
+                    <span>Support</span>
+                  </Link>
+                  <Link href="/accountSettings" className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]">
+                    <ShieldUser className="h-4 w-4 shrink-0" />
+                    <span>Account Settings</span>
+                  </Link>
+                  {isAdmin && (
+                    <Link href="/appSettings" className="flex items-center gap-2 px-4 py-2 hover:bg-[var(--hover-bg)]">
+                      <BadgeAlert className="h-4 w-4 shrink-0" />
+                      <span>App Settings</span>
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Modules */}
+          <div
+            className="overflow-y-auto max-h-[calc(100vh-64px-38px)] px-4 py-4 space-y-4"
+            onWheel={(e) => {
+              const el = e.currentTarget;
+              const atTop = el.scrollTop === 0 && e.deltaY < 0;
+              const atBottom =
+                el.scrollHeight - el.scrollTop === el.clientHeight &&
+                e.deltaY > 0;
+              if (atTop || atBottom) e.preventDefault();
+            }}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
+            {navItems.map((item) => {
+              const isModuleActive =
+                item.headings?.some((heading) =>
+                  heading.subItems?.some((sub) => pathname === sub.path)
+                ) || item.subItems?.some((sub) => pathname === sub.path);
+
+              const hasChildren = item.headings || item.subItems;
+
+              return (
                 <div key={item.path} className="space-y-1">
-                  {/* Module button */}
                   <button
-                    onClick={() =>
-                      setOpenMobileDropdown(
-                        openMobileDropdown === item.name ? null : item.name
-                      )
-                    }
-                    className={`flex justify-between w-full text-left px-3 py-2 rounded-md hover:bg-[var(--hover-bg)] items-center max-w-full ${
-                      isModuleActive
-                        ? "bg-[var(--color-secondary)] text-[var(--color-on-secondary)]"
-                        : "hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)]"
-                    }`}
+                    onClick={() => {
+                      if (hasChildren) {
+                        setOpenMobileDropdown(
+                          openMobileDropdown === item.name ? null : item.name
+                        );
+                      } else {
+                        setIsMobileMenuOpen(false);
+                        router.push(item.path);
+                      }
+                    }}
+                    className={`flex justify-between w-full text-left px-3 py-2 rounded-md items-center max-w-full
+                      ${
+                        isModuleActive
+                          ? "bg-[var(--color-secondary)] text-[var(--color-on-secondary)]"
+                          : "hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)]"
+                      }`}
                   >
-                    <div className="overflow-hidden max-w-[230px]">
-                      <span
-                        className={`inline-block whitespace-nowrap ${
-                          item.name.length > 42 ? "auto-scroll" : ""
-                        }`}
-                      >
+                    {/* Name */}
+                    <div
+                      className="overflow-hidden max-w-[230px]"
+                      onClick={() => {
+                        if (!hasChildren) {
+                          setIsMobileMenuOpen(false);
+                          router.push(item.path);
+                        }
+                      }}
+                    >
+                      <span className={`inline-block whitespace-nowrap ${item.name.length > 42 ? "auto-scroll" : ""}`}>
                         {item.name}
                       </span>
                     </div>
-                    {item.headings || item.subItems ? (
+
+                    {hasChildren && (
                       <svg
                         className={`ml-2 h-4 w-4 transition-transform ${
                           openMobileDropdown === item.name ? "rotate-180" : ""
@@ -1027,34 +1034,26 @@ const Page = () => {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
-                    ) : null}
+                    )}
                   </button>
 
-                  {/* Module dropdown */}
-                  {openMobileDropdown === item.name &&
-                    (item.headings || item.subItems) && (
-                      <div className="pl-4 space-y-2">
-                        {/* Headings + subItems */}
-                        {item.headings &&
-                          item.headings.map((heading) => (
-                            <div key={heading.title} className="space-y-1">
-                              <p className="flex items-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1 whitespace-break-spaces max-w-full">
-                                {heading.icon && (
-                                  <heading.icon className="h-4 w-4 mr-2" />
-                                )}
-                                {heading.title}
-                              </p>
-                              <div className="space-y-1 max-w-full">
-                                {heading.subItems.map((sub) => {
-                                  const isActiveSub = pathname === sub.path;
-                                  return (
+                  {/* Dropdown */}
+                  {openMobileDropdown === item.name && hasChildren && (
+                    <div className="pl-4 space-y-2">
+                      {item.headings &&
+                        item.headings.map((heading) => (
+                          <div key={heading.title} className="space-y-1">
+                            <p className="flex items-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1 whitespace-break-spaces max-w-full">
+                              {heading.icon && <heading.icon className="h-4 w-4 mr-2" />}
+                              {heading.title}
+                            </p>
+
+                            <div className="space-y-1 max-w-full">
+                              {heading.subItems.map((sub) => {
+                                const isActiveSub = pathname === sub.path;
+                                return (
                                   <Link
                                     key={sub.path}
                                     href={sub.path}
@@ -1062,74 +1061,58 @@ const Page = () => {
                                       setActive(item.name);
                                       setIsMobileMenuOpen(false);
                                     }}
-                                    className={`flex items-center px-2 py-1 rounded hover:bg-[var(--hover-bg)] overflow-hidden
+                                    className={`flex items-center px-2 py-1 rounded overflow-hidden
                                       ${
                                         isActiveSub
                                           ? "bg-[var(--color-secondary)] text-[var(--color-on-secondary)]"
                                           : "hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)]"
-                                      }`
-                                    }
+                                      }`}
                                   >
-                                    {sub.icon && (
-                                      <sub.icon className="h-4 w-4 mr-2 shrink-0 z-50" />
-                                    )}
-                                    <div className="relative overflow-hidden flex-1">
-                                      <span
-                                        className={`inline-block whitespace-nowrap ${
-                                          sub.name.length > 35
-                                            ? "auto-scroll"
-                                            : ""
-                                        }`}
-                                      >
-                                        {sub.name}
-                                      </span>
-                                    </div>
+                                    {sub.icon && <sub.icon className="h-4 w-4 mr-2 shrink-0" />}
+                                    <span className={`inline-block whitespace-nowrap ${sub.name.length > 35 ? "auto-scroll" : ""}`}>
+                                      {sub.name}
+                                    </span>
                                   </Link>
-                                )})}
-                              </div>
+                                );
+                              })}
                             </div>
-                          ))}
+                          </div>
+                        ))}
 
-                        {/* SubItems without heading */}
-                        {item.subItems &&
+                      {item.subItems &&
                         item.subItems.map((sub) => {
                           const isActiveSub = pathname === sub.path;
                           return (
-                          <Link
-                            key={sub.path}
-                            href={sub.path}
-                            onClick={() => {
-                              setActive(item.name);
-                              setIsMobileMenuOpen(false);
-                            }}
-                            className={`flex items-center px-2 py-1 text-sm rounded hover:bg-[var(--hover-bg)] overflow-hidden
-                              ${
-                              isActiveSub
-                                ? "text-[var(--color-secondary)]"
-                                : "hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)]"
-                            }`}
-                          >
-                            {sub.icon && (
-                              <sub.icon className="h-4 w-4 mr-2 shrink-0 z-50" />
-                            )}
-                            <div className="relative overflow-hidden flex-1">
-                              <span
-                                className={`inline-block whitespace-nowrap ${
-                                  sub.name.length > 12 ? "auto-scroll" : ""
+                            <Link
+                              key={sub.path}
+                              href={sub.path}
+                              onClick={() => {
+                                setActive(item.name);
+                                setIsMobileMenuOpen(false);
+                              }}
+                              className={`flex items-center px-2 py-1 text-sm rounded overflow-hidden
+                                ${
+                                  isActiveSub
+                                    ? "text-[var(--color-secondary)]"
+                                    : "hover:bg-[var(--color-tertiary)] hover:text-[var(--color-on-tertiary)]"
                                 }`}
-                              >
+                            >
+                              {sub.icon && <sub.icon className="h-4 w-4 mr-2 shrink-0" />}
+                              <span className={`inline-block whitespace-nowrap ${sub.name.length > 12 ? "auto-scroll" : ""}`}>
                                 {sub.name}
                               </span>
-                            </div>
-                          </Link>
-                        )})}
-                      </div>
-                    )}
+                            </Link>
+                          );
+                        })}
+                    </div>
+                  )}
                 </div>
-              )})}
-            </div>
+              );
+            })}
           </div>
-        )}
+        </div>
+)}
+
       </nav>
     </div>
   );

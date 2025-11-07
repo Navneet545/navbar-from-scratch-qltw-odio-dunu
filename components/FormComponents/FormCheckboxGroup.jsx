@@ -12,19 +12,21 @@ export default function FormCheckboxGroup({
   columns = 2 // ✅ customize number of columns
 }) {
   return (
-    <div className="flex flex-col" style={{ width: "100%" }}>
+    <div className="flex flex-col" style={{ width: "90%" }}>
       
       {/* Label + Inputs in one line */}
       <div 
         className="flex items-start"
-        style={{ width: "80%", gap: "20px" }} // ✅ keep your custom 25px gap
+        style={{ width: "100%", gap: "20px" }} // ✅ keep your custom 25px gap
       >
         <label className="text-sm font-medium w-34">{label}</label>
 
         {/* Checkbox list */}
         <div 
-          className={`grid w-full gap-2`}
-          style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+          className={`grid w-full gap-5`}
+          style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+          paddingLeft :"50px", 
+         }}
         >
           {options.map((option) => (
             <FormCheckbox
