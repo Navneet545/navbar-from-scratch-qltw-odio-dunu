@@ -46,7 +46,11 @@ export default function AdvancedReportTable() {
       }}
     >
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold tracking-wide">Donor Report</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-foreground/90 mb-2">
+          Donor Report
+        </h2>
+
+
 
         <input
           type="text"
@@ -59,21 +63,29 @@ export default function AdvancedReportTable() {
 
       <div className="overflow-x-auto overflow-y-auto max-h-[70vh] rounded-lg border border-[var(--border-color)]">
         <table className="w-full text-sm border-collapse">
-          <thead>
+          <thead className="sticky top-0 z-10">
             <tr
-              className="text-xs"
-              style={{
-                background: "linear-gradient(90deg, var(--color-secondary), var(--color-secondary-hover))",
-                color: "var(--color-on-secondary)",
+              className="
+                text-xs backdrop-blur-md
+                border-b border-[var(--border-color)]
+                shadow-sm
+                bg-background
+                text-foreground
+              "
+              style={{ 
+                // background: "rgba(255,255,255,0.6)", /* light glass for light mode */
+                WebkitBackdropFilter: "blur(10px)",
+                backdropFilter: "blur(10px)"
               }}
             >
-              <th className="p-3 text-left text-[15px]">Name</th>
-              <th className="p-3 text-left text-[15px]">Email</th>
-              <th className="p-3 text-center text-[15px]">Profile</th>
-              <th className="p-3 text-center text-[15px]">Amount</th>
-              <th className="p-3 text-center text-[15px]">Action</th>
+              <th className="p-3 text-left font-light text-[17px] tracking-wide">Name</th>
+              <th className="p-3 text-left font-light text-[17px] tracking-wide">Email</th>
+              <th className="p-3 text-center font-light text-[17px] tracking-wide">Profile</th>
+              <th className="p-3 text-center font-light text-[17px] tracking-wide">Amount</th>
+              <th className="p-3 text-center font-light text-[17px] tracking-wide">Action</th>
             </tr>
           </thead>
+
 
           <tbody>
             {filteredData.map((user) => (
