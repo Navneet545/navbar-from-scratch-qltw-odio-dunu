@@ -170,7 +170,7 @@ const Page = () => {
     },
     {
       name: "Reports-Reports-Reports-Reports",
-      path: "/report",
+      path: "",
       headings: [
         {
           title: "System Analytics and Integration",
