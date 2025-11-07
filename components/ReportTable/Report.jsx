@@ -4,19 +4,20 @@ import Image from "next/image";
 import { Eye } from "lucide-react";
 
 import profile1 from "@/public/profileImage.png";
-import profile2 from "@/public/profile.png";
+import profile2 from "@/public/profile.png"; 
+import profile3 from "@/public/newProfile.png";
 
 export default function AdvancedReportTable() {
   const [search, setSearch] = useState("");
 
   const data = [
-    { id: 1, name: "John Doe", email: "john@example.com", profile: "Athlete", image: profile1 },
+    { id: 1, name: "John Doe", email: "john@example.com", profile: "Athlete", image: profile3 },
     { id: 2, name: "Sarah Smith", email: "sarah@example.com", profile: "Coach", image: profile2 },
     { id: 3, name: "Michael Johnson", email: "michael@example.com", profile: "Volunteer", image: profile1 },
-    { id: 4, name: "Jessica Brown", email: "jessica@example.com", profile: "Donor", image: profile1 },
+    { id: 4, name: "Jessica Brown", email: "jessica@example.com", profile: "Donor", image: profile3 },
     { id: 5, name: "David Williams", email: "david@example.com", profile: "Athlete", image: profile2 },
     { id: 6, name: "Emily Davis", email: "emily@example.com", profile: "Coach", image: profile1 },
-    { id: 7, name: "Chris Miller", email: "chris@example.com", profile: "Volunteer", image: profile2 },
+    { id: 7, name: "Chris Miller", email: "chris@example.com", profile: "Volunteer", image: profile3 },
     { id: 8, name: "Sophia Wilson", email: "sophia@example.com", profile: "Donor", image: profile2 },
     { id: 9, name: "Daniel Martin", email: "daniel@example.com", profile: "Athlete", image: profile1 },
     { id: 10, name: "Olivia Taylor", email: "olivia@example.com", profile: "Coach", image: profile2 },
@@ -37,7 +38,7 @@ export default function AdvancedReportTable() {
 
   return (
     <div
-      className="w-full p-5 rounded-xl backdrop-blur-md"
+      className="w-full p-2 rounded-xl backdrop-blur-md"
       style={{
         background: "var(--background)",
         border: "1px solid var(--border-color)",
@@ -84,15 +85,17 @@ export default function AdvancedReportTable() {
                 style={{ boxShadow: "inset 0 -0.2px 0 var(--border-color)" }}
               >
                 {/* ✅ IMAGE + NAME */}
-                <td className="p-3 text-left flex items-left gap-3">
-                  <div className="h-10 w-10 rounded-full overflow-hidden border border-[var(--border-color)] shadow-sm transition group-hover:ring-2 group-hover:ring-[var(--color-secondary)] group-hover:scale-110">
-                    <Image 
-                      src={user.image}
-                      alt="User"
-                      width={40}
-                      height={40}
-                      className="object-cover w-full h-full"
-                    />
+                <td className="p-3 text-left">
+                  <div className="flex items-left gap-3">
+                    <div className="h-10 w-10 rounded-full overflow-hidden border border-[var(--border-color)] shadow-sm transition group-hover:ring-2 group-hover:ring-[var(--color-secondary)] group-hover:scale-110">
+                      <Image 
+                        src={user.image}
+                        alt="User"
+                        width={40}
+                        height={40}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
                   </div>
                   <span className="font-medium group-hover:text-[var(--color-secondary)] hover:scale-[1.03] transition cursor-pointer">
                     {user.name}
@@ -119,13 +122,14 @@ export default function AdvancedReportTable() {
                 </td>
 
                 {/* VIEW BUTTON */}
-                <td className="p-3 flex justify-center items-center">
-                  <button className="flex items-center gap-1 px-3 py-1 text-xs rounded-lg transition shadow-sm border border-transparent
+                <td className="p-3 text-center align-middle">
+                  <button className="inline-flex items-center gap-1 px-3 py-1 text-xs rounded-lg transition shadow-sm border border-transparent
                     bg-[var(--color-secondary)] text-[var(--color-on-secondary)]
                     hover:bg-[var(--color-secondary-hover)] hover:shadow-md hover:scale-105 active:scale-95">
                     <Eye size={14} /> View
                   </button>
                 </td>
+
               </tr>
             ))}
 

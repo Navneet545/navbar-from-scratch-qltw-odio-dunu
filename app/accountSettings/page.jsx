@@ -5,7 +5,7 @@ import { Mail, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PasswordSettings from "@/components/Settings/resetPassword";
 import EmailSetting from "@/components/Settings/changeEmail";
-import profile2 from "../../public/profileImage.png";
+import profile2 from "../../public/newProfile.png";
 import withAuth from '@/hoc/withAuth';
 import { useRouter } from "next/navigation";
 
