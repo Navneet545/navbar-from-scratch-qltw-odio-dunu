@@ -5,7 +5,7 @@ import { Mail, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PasswordSettings from "@/components/Settings/resetPassword";
 import EmailSetting from "@/components/Settings/changeEmail";
-import profile2 from "../../public/newProfile.png";
+const profile2 = "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500";
 import withAuth from '@/hoc/withAuth';
 import { useRouter } from "next/navigation";
 

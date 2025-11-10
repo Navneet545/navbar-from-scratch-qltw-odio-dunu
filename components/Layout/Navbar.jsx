@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import profile from "../../public/newProfile.png";
-import logo from "../../public/truactlogo.png";
+const profile = "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500";
+const logo = "https://www.truact.in/Truact_logo_reverse-01.png";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Eye } from "lucide-react";
 
-import profile1 from "@/public/profileImage.png";
-import profile2 from "@/public/profile.png"; 
-import profile3 from "@/public/newProfile.png";
+const profile1 = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500";
+const profile2 = "https://plus.unsplash.com/premium_photo-1681489930334-b0d26fdb9ed8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500"; 
+const profile3 = "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500";
 
 export default function AdvancedReportTable1() {
   const [search, setSearch] = useState("");
