@@ -221,11 +221,18 @@ const Page = () => {
     {
       name: "Organization",
       path: "/analytics2",
-      subItems: [
+      headings: [
+        {
+          title: "Types",
+          icon: Database,
+          subItems: [
         { name: "Basic", path: "/analytics2/basic" },
         { name: "Pro", path: "/analytics2/pro" },
         { name: "Enterprise", path: "/analytics2/enterprise" },
+        ],
+        },
       ],
+      
     },
     
     {
