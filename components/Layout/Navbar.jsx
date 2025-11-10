@@ -155,11 +155,11 @@ const Page = () => {
           icon: Book,
           subItems: [
             {
-              name: "Marketing",
+              name: "Individual data display",
               path: "/dashboard/subModule",
               icon: FileText,
             },
-            { name: "Sales", path: "/dashboard/sales", icon: BookUser },
+            { name: "Impacts of Donation", path: "/dashboard/sales", icon: BookUser },
           ],
         },
         {
@@ -184,10 +184,6 @@ const Page = () => {
       ],
     },
     {
-      name: "Analytics",
-      path: "/analytics",
-    },
-    {
       name: "Reports",
       path: "/report",
     },
@@ -196,7 +192,7 @@ const Page = () => {
       path: "/form",
     },
     {
-      name: "Donation",
+      name: "Donation member",
       path: "/analytic",
       headings: [
         {
@@ -205,59 +201,75 @@ const Page = () => {
           subItems: [
             { name: "About", path: "/analytic/about" },
             { name: "Team", path: "/analytic/team" },
-            { name: "Careers", path: "/analytic/career" },
           ],
         },
       ],
     },
-    
     {
-      name: "Organizations",
-      path: "/analytics2",
+      name: "Events",
+      path: "/tech",
       headings: [
         {
-          title: "types",
-          icon: Database,
+          title: "Knowledge",
           subItems: [
+            { name: "About", path: "/tech/about" },
+            { name: "Team", path: "/tech/team" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Organization",
+      path: "/analytics2",
+      subItems: [
         { name: "Basic", path: "/analytics2/basic" },
         { name: "Pro", path: "/analytics2/pro" },
         { name: "Enterprise", path: "/analytics2/enterprise" },
-         ],
-        },
       ],
-      
     },
-    
+    {
+      name: "FormsForm",
+      path: "/forms2",
+    },
     {
       name: "Tech",
       path: "/tech2",
+    },
+    {
+      name: "Knowledge Sharing",
+      path: "/report3",
       headings: [
         {
-          title: "Knowledge",
+          title: "System Analytics and Integration",
+          icon: Database,
           subItems: [
-            { name: "About", path: "/tech2/about" },
-            { name: "Team", path: "/tech2/team" },
-            { name: "Careers", path: "/tech2/career" },
+            { name: "Tech", path: "/report3/analytics", icon: BookUser },
+            {
+              name: "Donation",
+              path: "/report3/integration",
+              icon: FileText,
+            },
+            { name: "Impact", path: "/report3/security", icon: ShieldHalf },
           ],
         },
       ],
     },
     {
-      name: "Knowledge Section",
-      path: "/tech6",
+      name: "Analytica",
+      path: "/analytic3",
       headings: [
         {
-          title: "Knowledge",
+          title: "parts",
           subItems: [
-            { name: "About", path: "/tech3/about" },
-            { name: "Team", path: "/tech3/team" },
-            { name: "Careers", path: "/tech3/career" },
+            { name: "About", path: "/analytic3/about" },
+            { name: "Team", path: "/analytic3/team" },
+            { name: "Careers", path: "/analytic3/career" },
           ],
         },
       ],
     },
     {
-      name: "Data Display",
+      name: "Technical Analysis",
       path: "/tech3",
       headings: [
         {
@@ -265,11 +277,11 @@ const Page = () => {
           subItems: [
             { name: "About", path: "/tech3/about" },
             { name: "Team", path: "/tech3/team" },
-            { name: "Careers", path: "/tech3/career" },
           ],
         },
       ],
     },
+    
     
     
   ];
