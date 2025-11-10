@@ -7,8 +7,7 @@ const page = () => {
       {/* Content Area */}
         <main className="flex-grow w-full mx-auto px-0 py-2">
             <div className="bg-background text-foreground px-2 py-0">
-              <h6 className='p-2'><b>Forms</b></h6>
-                <DonationForm/>
+              <DonationForm/>
             </div>
         </main>
 

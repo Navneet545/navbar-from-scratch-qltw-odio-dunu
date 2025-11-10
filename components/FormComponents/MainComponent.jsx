@@ -341,251 +341,255 @@ const addAdditionalRow = () => {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-6 rounded-lg shadow-md w-full"
-      style={{
-        borderColor: "var(--border-color)",
-        color: "var(--foreground)",
-        backgroundColor: "var(--background)",
-        boxShadow: "0px 0px 8px 2px var(--shadow-color)",
-      }}
-    >
-      {/* Basic Info */}
-      <FormInput 
-        label="Full Name *" 
-        name="name" 
-        value={formData.name}
-        onChange={handleInputChange}
-        error={errors.name}
-        placeholder="Enter your full name"
-      />
-      <FormInput 
-        label="Email *" 
-        name="email" 
-        type="email"
-        value={formData.email}
-        onChange={handleInputChange}
-        error={errors.email}
-        placeholder="your@email.com"
-      />
-      <FormInput 
-        label="Phone Number *" 
-        name="phone" 
-        value={formData.phone}
-        onChange={handleInputChange}
-        error={errors.phone}
-        placeholder="+1234567890"
-      />
-
-      {/* Address */}
-      <FormTextarea 
-        label="Address *"
-        name="address"
-        value={formData.address}
-        onChange={handleInputChange}
-        error={errors.address}
-        placeholder="Enter your full address..."
-        rows={3}
-        resize="vertical"
-      />
-      
-      <FormInput 
-        label="Country *" 
-        name="country" 
-        type="select"
-        value={formData.country}
-        onChange={handleInputChange}
-        options={COUNTRIES}
-        error={errors.country}
-      />
-      
-      <FormInput 
-        label="State *" 
-        name="state" 
-        type="select"
-        value={formData.state}
-        onChange={handleInputChange}
-        options={getStateOptions()}
-        error={errors.state}
-        disabled={!formData.country}
-      />
-      
-      <FormInput 
-        label="City *" 
-        name="city" 
-        type="select"
-        value={formData.city}
-        onChange={handleInputChange}
-        options={getCityOptions()}
-        error={errors.city}
-        disabled={!formData.state}
-      />
-      
-      <FormInput 
-        label="PIN Code *" 
-        name="pin" 
-        value={formData.pin}
-        onChange={handleInputChange}
-        error={errors.pin}
-        placeholder="123456"
-      />
-
-      {/* Other Details */}
-      <FormInput 
-        label="Date *" 
-        name="date" 
-        type="date"
-        value={formData.date}
-        onChange={handleInputChange}
-        error={errors.date}
-        className="w-full min-w-0"
-      />
-      
-      <FormInput 
-        label="Gender *" 
-        name="gender" 
-        type="radio"
-        value={formData.gender}
-        onChange={handleInputChange}
-        options={GENDER_OPTIONS}
-        error={errors.gender}
-      />
-
-      {/* Donation Scheme */}
-      <FormCheckboxGroup
-        label="Donation Schemes *"
-        name="donationSchemes"
-        options={["Sports", "Health"]}
-        value={formData.donationSchemes}
-        onChange={handleInputChange}
-        error={errors.donationSchemes}
-      />
-
-
-      {/* File Uploads */}
-      <div className="flex flex-col"
-      style={{
-        width: "90%",
-      }}>
-        <div className="flex justify-center items-center gap-20"
-        style={{
-        width: "100%",
-      }}>
-          <label className="text-sm mb-1 w-34">Upload Image *</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleInputChange}
-            className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
-              errors.image ? "border-red-500" : "border-[var(--border-color)]"
-            }`}
-          />
-        </div>
-        {errors.image && <p className="text-xs text-red-500 mt-1">{errors.image}</p>}
-        {formData.image && !errors.image && (
-          <p className="text-xs text-green-600 mt-1">✓ {formData.image.name}</p>
-        )}
-      </div>
-
-      {/* Document Upload */}
-      <CompactDocumentUpload
-        label="Upload Documents *"
-        name="documents"
-        value={formData.documents}
-        onChange={handleInputChange}
-        error={errors.documents}
-        maxFiles={10}
-        maxSizeMB={5}
-      />
-
-      {/* Media Uploads */}
-      <AudioUpload
-        label="Upload Audio *"
-        name="audio"
-        value={formData.audio}
-        onChange={handleInputChange}
-        error={errors.audio}
-      />
-
-      <VideoUpload
-        label="Upload Video *"
-        name="video"
-        value={formData.video}
-        onChange={handleInputChange}
-        error={errors.video}
-      />
-
-      {/* Website */}
-      <FormInput 
-        label="Website *" 
-        name="website" 
-        type="url"
-        value={formData.website}
-        onChange={handleInputChange}
-        placeholder="google.com"
-        error={errors.website}
-      />
-
-      {/* Comments */}
-      <FormTextarea 
-        label="Additional Information *"
-        name="comments"
-        value={formData.comments}
-        onChange={handleInputChange}
-        error={errors.comments}
-        placeholder="Any additional comments or information..."
-        rows={3}
-        resize="vertical"
-      />
-
-      {/* Signature Pad */}
-      <div className="flex flex-col">
-        <SignaturePad
-          label="Signature *"
-          name="signature"
-          value={formData.signature}
-          onChange={handleSignatureChange}
-          error={errors.signature}
-        />
-      </div>
-
-      <div className="col-span-full">
-        <AdditionalDetailsSubForm
-          rows={additionalRows}
-          onFieldChange={handleSubFormChange}
-          onAddRow={handleAddRow}
-          onDeleteRow={handleDeleteRow}
-          errors={errors}
-        />
-      </div>
-
-      {/* Terms */}
-      <div className="col-span-full flex items-center space-x-2">
-        <input 
-          type="checkbox" 
-          name="terms"
-          checked={formData.terms}
-          onChange={handleInputChange}
-          className={`h-4 w-4 accent-[var(--color-primary)] ${
-            errors.terms ? "border-red-500" : ""
-          }`}
-        />
-        <label className="text-sm">I agree to the terms and conditions *</label>
-      </div>
-      {errors.terms && <p className="text-xs text-red-500 col-span-full">{errors.terms}</p>}
-
-      {/* Sticky Submit Button */}
-      <div className="fixed bottom-14 md:bottom-10 right-10 md:right-10 z-50">
-        <button
-          type="submit"
-          className="px-6 py-3 rounded-lg bg-[var(--color-secondary)] text-[var(--color-on-secondary)] hover:bg-[var(--color-secondary-hover)] transition shadow-lg font-semibold"
+    <div className="rounded-lg shadow-md w-full" style={{
+            borderColor: "var(--border-color)",
+            color: "var(--foreground)",
+            backgroundColor: "var(--background)",
+            boxShadow: "0px 0px 8px 2px var(--shadow-color)",
+          }}>
+      <h6 className='p-6'><b>Forms</b></h6>
+      <div>
+        <form
+          onSubmit={onSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-6 "
         >
-          Submit
-        </button>
-      </div>
+          {/* Basic Info */}
+          <FormInput 
+            label="Full Name *" 
+            name="name" 
+            value={formData.name}
+            onChange={handleInputChange}
+            error={errors.name}
+            placeholder="Enter your full name"
+          />
+          <FormInput 
+            label="Email *" 
+            name="email" 
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            error={errors.email}
+            placeholder="your@email.com"
+          />
+          <FormInput 
+            label="Phone Number *" 
+            name="phone" 
+            value={formData.phone}
+            onChange={handleInputChange}
+            error={errors.phone}
+            placeholder="+1234567890"
+          />
 
-    </form>
+          {/* Address */}
+          <FormTextarea 
+            label="Address *"
+            name="address"
+            value={formData.address}
+            onChange={handleInputChange}
+            error={errors.address}
+            placeholder="Enter your full address..."
+            rows={3}
+            resize="vertical"
+          />
+          
+          <FormInput 
+            label="Country *" 
+            name="country" 
+            type="select"
+            value={formData.country}
+            onChange={handleInputChange}
+            options={COUNTRIES}
+            error={errors.country}
+          />
+          
+          <FormInput 
+            label="State *" 
+            name="state" 
+            type="select"
+            value={formData.state}
+            onChange={handleInputChange}
+            options={getStateOptions()}
+            error={errors.state}
+            disabled={!formData.country}
+          />
+          
+          <FormInput 
+            label="City *" 
+            name="city" 
+            type="select"
+            value={formData.city}
+            onChange={handleInputChange}
+            options={getCityOptions()}
+            error={errors.city}
+            disabled={!formData.state}
+          />
+          
+          <FormInput 
+            label="PIN Code *" 
+            name="pin" 
+            value={formData.pin}
+            onChange={handleInputChange}
+            error={errors.pin}
+            placeholder="123456"
+          />
+
+          {/* Other Details */}
+          <FormInput 
+            label="Date *" 
+            name="date" 
+            type="date"
+            value={formData.date}
+            onChange={handleInputChange}
+            error={errors.date}
+            className="w-full min-w-0"
+          />
+          
+          <FormInput 
+            label="Gender *" 
+            name="gender" 
+            type="radio"
+            value={formData.gender}
+            onChange={handleInputChange}
+            options={GENDER_OPTIONS}
+            error={errors.gender}
+          />
+
+          {/* Donation Scheme */}
+          <FormCheckboxGroup
+            label="Donation Schemes *"
+            name="donationSchemes"
+            options={["Sports", "Health"]}
+            value={formData.donationSchemes}
+            onChange={handleInputChange}
+            error={errors.donationSchemes}
+          />
+
+
+          {/* File Uploads */}
+          <div className="flex flex-col"
+          style={{
+            width: "90%",
+          }}>
+            <div className="flex justify-center items-center gap-20"
+            style={{
+            width: "100%",
+          }}>
+              <label className="text-sm mb-1 w-34">Upload Image *</label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleInputChange}
+                className={`w-full border rounded-lg p-2 bg-[var(--background)] ${
+                  errors.image ? "border-red-500" : "border-[var(--border-color)]"
+                }`}
+              />
+            </div>
+            {errors.image && <p className="text-xs text-red-500 mt-1">{errors.image}</p>}
+            {formData.image && !errors.image && (
+              <p className="text-xs text-green-600 mt-1">✓ {formData.image.name}</p>
+            )}
+          </div>
+
+          {/* Document Upload */}
+          <CompactDocumentUpload
+            label="Upload Documents *"
+            name="documents"
+            value={formData.documents}
+            onChange={handleInputChange}
+            error={errors.documents}
+            maxFiles={10}
+            maxSizeMB={5}
+          />
+
+          {/* Media Uploads */}
+          <AudioUpload
+            label="Upload Audio *"
+            name="audio"
+            value={formData.audio}
+            onChange={handleInputChange}
+            error={errors.audio}
+          />
+
+          <VideoUpload
+            label="Upload Video *"
+            name="video"
+            value={formData.video}
+            onChange={handleInputChange}
+            error={errors.video}
+          />
+
+          {/* Website */}
+          <FormInput 
+            label="Website *" 
+            name="website" 
+            type="url"
+            value={formData.website}
+            onChange={handleInputChange}
+            placeholder="google.com"
+            error={errors.website}
+          />
+
+          {/* Comments */}
+          <FormTextarea 
+            label="Additional Information *"
+            name="comments"
+            value={formData.comments}
+            onChange={handleInputChange}
+            error={errors.comments}
+            placeholder="Any additional comments or information..."
+            rows={3}
+            resize="vertical"
+          />
+
+          {/* Signature Pad */}
+          <div className="flex flex-col">
+            <SignaturePad
+              label="Signature *"
+              name="signature"
+              value={formData.signature}
+              onChange={handleSignatureChange}
+              error={errors.signature}
+            />
+          </div>
+
+          <div className="col-span-full">
+            <AdditionalDetailsSubForm
+              rows={additionalRows}
+              onFieldChange={handleSubFormChange}
+              onAddRow={handleAddRow}
+              onDeleteRow={handleDeleteRow}
+              errors={errors}
+            />
+          </div>
+
+          {/* Terms */}
+          <div className="col-span-full flex items-center space-x-2">
+            <input 
+              type="checkbox" 
+              name="terms"
+              checked={formData.terms}
+              onChange={handleInputChange}
+              className={`h-4 w-4 accent-[var(--color-primary)] ${
+                errors.terms ? "border-red-500" : ""
+              }`}
+            />
+            <label className="text-sm">I agree to the terms and conditions *</label>
+          </div>
+          {errors.terms && <p className="text-xs text-red-500 col-span-full">{errors.terms}</p>}
+
+          {/* Sticky Submit Button */}
+          <div className="fixed bottom-14 md:bottom-10 right-10 md:right-10 z-50">
+            <button
+              type="submit"
+              className="px-6 py-3 rounded-lg bg-[var(--color-secondary)] text-[var(--color-on-secondary)] hover:bg-[var(--color-secondary-hover)] transition shadow-lg font-semibold"
+            >
+              Submit
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
   );
 }

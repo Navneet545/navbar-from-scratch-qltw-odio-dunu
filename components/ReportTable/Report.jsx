@@ -41,8 +41,9 @@ export default function AdvancedReportTable() {
       className="w-full p-2 rounded-xl backdrop-blur-md"
       style={{
         background: "var(--background)",
-        border: "1px solid var(--border-color)",
-        boxShadow: "0px 4px 18px var(--shadow-color)",
+        borderColor: "var(--border-color)",
+        color: "var(--foreground)",
+        boxShadow: "0px 0px 8px 2px var(--shadow-color)",
       }}
     >
       <div className="flex justify-between items-center mb-4">
