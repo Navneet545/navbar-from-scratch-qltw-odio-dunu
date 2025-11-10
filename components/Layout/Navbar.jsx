@@ -122,7 +122,7 @@ const Page = () => {
 
       // estimate avg width per item (adjust if your design needs)
       const itemWidth = 120;
-      const maxVisible = Math.floor(containerWidth / itemWidth) - 1; // leave space for "..."
+      const maxVisible = Math.floor(containerWidth / itemWidth) - 5; // leave space for "..."
       setVisibleCount(Math.max(1, Math.min(maxVisible, navItems.length)));
     });
 
@@ -146,7 +146,7 @@ const Page = () => {
 
   const navItems = [
     {
-      name: "Dashboard-Dashboard-Dashboard-Dashboard-Dashboard",
+      name: "Dashboard",
       path: "/dashboard",
       icon: SquareChartGantt,
       headings: [
@@ -155,7 +155,7 @@ const Page = () => {
           icon: Book,
           subItems: [
             {
-              name: "Marketing-abc abc abc bac bac abc abc abc",
+              name: "Marketing",
               path: "/dashboard/subModule",
               icon: FileText,
             },
@@ -169,7 +169,7 @@ const Page = () => {
       ],
     },
     {
-      name: "Reports-Reports-Reports-Reports",
+      name: "System Analytics and Integration",
       path: "",
       headings: [
         {
@@ -184,7 +184,7 @@ const Page = () => {
       ],
     },
     {
-      name: "Analytics-Analytics-Analytics-Analytics",
+      name: "Analytics",
       path: "/analytics",
     },
     {
@@ -196,7 +196,7 @@ const Page = () => {
       path: "/form",
     },
     {
-      name: "Analytic-Analytic-Analytic-Analytic",
+      name: "Donation",
       path: "/analytic",
       headings: [
         {
@@ -210,68 +210,26 @@ const Page = () => {
         },
       ],
     },
+    
     {
-      name: "TechTechi",
-      path: "/tech",
+      name: "Organizations",
+      path: "/analytics2",
       headings: [
         {
-          title: "Knowledge",
-          subItems: [
-            { name: "About", path: "/tech/about" },
-            { name: "Team", path: "/tech/team" },
-            { name: "Careers", path: "/tech/career" },
-          ],
-        },
-      ],
-    },
-    {
-      name: "ReportsRep",
-      path: "/report2",
-      headings: [
-        {
-          title: "System Analytics and Integration",
+          title: "types",
           icon: Database,
           subItems: [
-            { name: "Analytics", path: "/report2/analytics", icon: BookUser },
-            {
-              name: "Integration",
-              path: "/report2/integration",
-              icon: FileText,
-            },
-            { name: "Security", path: "/report2/security", icon: ShieldHalf },
-          ],
-        },
-      ],
-    },
-    {
-      name: "AnalyticsAna",
-      path: "/analytics2",
-      subItems: [
         { name: "Basic", path: "/analytics2/basic" },
         { name: "Pro", path: "/analytics2/pro" },
         { name: "Enterprise", path: "/analytics2/enterprise" },
-      ],
-    },
-    {
-      name: "FormsForm",
-      path: "/forms2",
-    },
-    {
-      name: "AnalyticAn-AnalyticAn-AnalyticAn",
-      path: "/analytic2",
-      headings: [
-        {
-          title: "parts2",
-          subItems: [
-            { name: "About", path: "/analytic2/about" },
-            { name: "Team", path: "/analytic2/team" },
-            { name: "Careers", path: "/analytic2/career" },
-          ],
+         ],
         },
       ],
+      
     },
+    
     {
-      name: "TechTec",
+      name: "Tech",
       path: "/tech2",
       headings: [
         {
@@ -285,54 +243,8 @@ const Page = () => {
       ],
     },
     {
-      name: "ReportsRe",
-      path: "/report3",
-      headings: [
-        {
-          title: "System Analytics and Integration",
-          icon: Database,
-          subItems: [
-            { name: "Analytics", path: "/report3/analytics", icon: BookUser },
-            {
-              name: "Integration",
-              path: "/report3/integration",
-              icon: FileText,
-            },
-            { name: "Security", path: "/report3/security", icon: ShieldHalf },
-          ],
-        },
-      ],
-    },
-    {
-      name: "AnalyticsAn",
-      path: "/analytics3",
-      subItems: [
-        { name: "Basic", path: "/analytics3/basic" },
-        { name: "Pro", path: "/analytics3/pro" },
-        { name: "Enterprise", path: "/analytics3/enterprise" },
-      ],
-    },
-    {
-      name: "Form",
-      path: "/forms3",
-    },
-    {
-      name: "Analytica",
-      path: "/analytic3",
-      headings: [
-        {
-          title: "parts",
-          subItems: [
-            { name: "About", path: "/analytic3/about" },
-            { name: "Team", path: "/analytic3/team" },
-            { name: "Careers", path: "/analytic3/career" },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Techi",
-      path: "/tech3",
+      name: "Knowledge Section",
+      path: "/tech6",
       headings: [
         {
           title: "Knowledge",
@@ -345,65 +257,21 @@ const Page = () => {
       ],
     },
     {
-      name: "ReportsR",
-      path: "/report4",
-      headings: [
-        {
-          title: "System Analytics and Integration",
-          icon: Database,
-          subItems: [
-            { name: "Analytics", path: "/report4/analytics", icon: BookUser },
-            {
-              name: "Integration",
-              path: "/report4/integration",
-              icon: FileText,
-            },
-            { name: "Security", path: "/report4/security", icon: ShieldHalf },
-          ],
-        },
-      ],
-    },
-    {
-      name: "AnalyticsA",
-      path: "/analytics4",
-      subItems: [
-        { name: "Basic", path: "/analytics4/basic" },
-        { name: "Pro", path: "/analytics4/pro" },
-        { name: "Enterprise", path: "/analytics4/enterprise" },
-      ],
-    },
-    {
-      name: "FormsF",
-      path: "/forms4",
-    },
-    {
-      name: "AnalyticA",
-      path: "/analytic4",
-      headings: [
-        {
-          title: "parts",
-          subItems: [
-            { name: "About", path: "/analytic4/about" },
-            { name: "Team", path: "/analytic4/team" },
-            { name: "Careers", path: "/analytic4/career" },
-          ],
-        },
-      ],
-    },
-    {
-      name: "TechT",
-      path: "/tech4",
+      name: "Data Display",
+      path: "/tech3",
       headings: [
         {
           title: "Knowledge",
           subItems: [
-            { name: "About", path: "/tech4/about" },
-            { name: "Team", path: "/tech4/team" },
-            { name: "Careers", path: "/tech4/career" },
+            { name: "About", path: "/tech3/about" },
+            { name: "Team", path: "/tech3/team" },
+            { name: "Careers", path: "/tech3/career" },
           ],
         },
       ],
     },
+    
+    
   ];
 
   // const visibleModules = navItems.slice(0, 5);
