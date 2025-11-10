@@ -227,14 +227,7 @@ const Page = () => {
         { name: "Enterprise", path: "/analytics2/enterprise" },
       ],
     },
-    {
-      name: "FormsForm",
-      path: "/forms2",
-    },
-    {
-      name: "Tech",
-      path: "/tech2",
-    },
+    
     {
       name: "Knowledge Sharing",
       path: "/report3",
