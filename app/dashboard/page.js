@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import withAuth from '@/hoc/withAuth';
 import { useRouter } from "next/navigation";
+import DonationDashboard from '@/components/dashboard/Dashboard';
+ 
 
 const DashboardPage = () => {
   const [tokenData, setTokenData] = useState(null);
@@ -49,6 +51,9 @@ const DashboardPage = () => {
             <div>
               <p>{`Welcome to the dashboard ${tokenData.firstName} !!`}</p>
               {/* <p>Role ID: {tokenData.ROLEID}</p> */}
+              <div>
+                <DonationDashboard/>
+              </div>
             </div>
           )}
         </div>
