@@ -7,7 +7,7 @@ import profile1 from "@/public/profileImage.png";
 import profile2 from "@/public/profile.png"; 
 import profile3 from "@/public/newProfile.png";
 
-export default function AdvancedReportTable() {
+export default function AdvancedReportTable1() {
   const [search, setSearch] = useState("");
 
   const data = [
