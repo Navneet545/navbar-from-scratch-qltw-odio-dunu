@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Eye } from "lucide-react";
+import { useLanguage } from "../Context/languageContext";
+
 
 const profile1 = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500";
 const profile2 = "https://plus.unsplash.com/premium_photo-1681489930334-b0d26fdb9ed8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500"; 
 const profile3 = "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500";
 
 export default function AdvancedReportTable1() {
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
 
   const data = [
@@ -80,9 +83,9 @@ export default function AdvancedReportTable1() {
               }}
             >
               <th className="p-3 text-left font-light text-[17px] tracking-wide">Name</th>
-              <th className="p-3 text-left font-light text-[17px] tracking-wide">Email</th>
-              <th className="p-3 text-center font-light text-[17px] tracking-wide">Profile</th>
-              <th className="p-3 text-center font-light text-[17px] tracking-wide">Amount</th>
+              <th className="p-3 text-left font-light text-[17px] tracking-wide">{t["Email"]}</th>
+              <th className="p-3 text-center font-light text-[17px] tracking-wide">{t["Profile"]}</th>
+              <th className="p-3 text-center font-light text-[17px] tracking-wide">{t["Amount"]}</th>
               <th className="p-3 text-center font-light text-[17px] tracking-wide">Action</th>
             </tr>
           </thead>

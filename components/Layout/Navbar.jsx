@@ -33,9 +33,11 @@ import SubmenuPortal from "../Menu/Submenu";
 import { usePathname } from "next/navigation";
 import { useAppSettings } from "../../components/Context/appSettingContext";
 import { darkenColor, lightenColor, getContrastText, getBrightness } from "../../utils/color";
+import { useLanguage } from "../Context/languageContext";
 
 
 const Page = () => {
+  const { t } = useLanguage();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -192,7 +194,7 @@ const Page = () => {
       path: "/form",
     },
     {
-      name: "Donation member",
+      name: "Donation Member",
       path: "/analytic",
       headings: [
         {
@@ -475,7 +477,7 @@ const Page = () => {
                             item.name.length > 7 ? "hover:animate-scroll" : ""
                           }`}
                         >
-                          {item.name}
+                          {t[item.name]}
                         </span>
                       </div>
 
@@ -517,7 +519,7 @@ const Page = () => {
                                   {heading.icon && (
                                     <heading.icon className="h-4 w-4 mr-2" />
                                   )}
-                                  {heading.title}
+                                  {t[heading.title]}
                                 </p>
                                 <div className="space-y-1">
                                   {heading.subItems.map((sub) => {
@@ -527,7 +529,7 @@ const Page = () => {
                                       key={sub.path}
                                       href={sub.path}
                                       onClick={() => {
-                                        setActive(item.name);
+                                        setActive(t[item.name]);
                                         setOpenDropdown(null);
                                       }}
                                       className={`flex items-center px-2 py-1 text-sm rounded
@@ -549,7 +551,7 @@ const Page = () => {
                                               : ""
                                           }`}
                                         >
-                                          {sub.name}
+                                          {t[sub.name]}
                                         </span>
                                       </div>
                                     </Link>
@@ -568,7 +570,7 @@ const Page = () => {
                   <Link
                     href={item.path}
                     onClick={() => {
-                      setActive(item.name);
+                      setActive(t[item.name]);
                       setOpenDropdown(null);
                     }}
                     className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md max-w-[120px] ${
@@ -583,7 +585,7 @@ const Page = () => {
                           item.name.length > 7 ? "hover:animate-scroll" : ""
                         }`}
                       >
-                        {item.name}
+                        {t[item.name]}
                       </span>
                     </div>
                   </Link>
@@ -682,7 +684,7 @@ const Page = () => {
                                         : ""
                                     }`}
                                   >
-                                    {item.name}
+                                    {t[item.name]}
                                   </span>
                                 </div>
                                 {(item.headings || item.subItems) && (
@@ -722,7 +724,7 @@ const Page = () => {
                               <Link
                                 href={item.path}
                                 onClick={() => {
-                                  setActive(item.name);
+                                  setActive(t[item.name]);
                                   setOpenDropdown(null);
                                 }}
                                 className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md max-w-[120px] ${
@@ -737,7 +739,7 @@ const Page = () => {
                                       item.name.length > 7 ? "hover:animate-scroll" : ""
                                     }`}
                                   >
-                                    {item.name}
+                                    {t[item.name]}
                                   </span>
                                 </div>
                               </Link>
@@ -901,7 +903,7 @@ const Page = () => {
                       }}
                     >
                       <span className={`inline-block whitespace-nowrap ${item.name.length > 42 ? "auto-scroll" : ""}`}>
-                        {item.name}
+                        {t[item.name]}
                       </span>
                     </div>
 
@@ -928,7 +930,7 @@ const Page = () => {
                           <div key={heading.title} className="space-y-1">
                             <p className="flex items-center text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1 whitespace-break-spaces max-w-full">
                               {heading.icon && <heading.icon className="h-4 w-4 mr-2" />}
-                              {heading.title}
+                              {t[heading.title]}
                             </p>
 
                             <div className="space-y-1 max-w-full">
@@ -951,7 +953,7 @@ const Page = () => {
                                   >
                                     {sub.icon && <sub.icon className="h-4 w-4 mr-2 shrink-0" />}
                                     <span className={`inline-block whitespace-nowrap ${sub.name.length > 35 ? "auto-scroll" : ""}`}>
-                                      {sub.name}
+                                      {t[sub.name]}
                                     </span>
                                   </Link>
                                 );
@@ -980,7 +982,7 @@ const Page = () => {
                             >
                               {sub.icon && <sub.icon className="h-4 w-4 mr-2 shrink-0" />}
                               <span className={`inline-block whitespace-nowrap ${sub.name.length > 12 ? "auto-scroll" : ""}`}>
-                                {sub.name}
+                                {t[sub.name]}
                               </span>
                             </Link>
                           );

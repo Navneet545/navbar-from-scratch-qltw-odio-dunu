@@ -110,4 +110,16 @@ select:hover {
   white-space: nowrap;
 }
 
+.goog-te-banner-frame, .goog-te-balloon-frame {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+
 

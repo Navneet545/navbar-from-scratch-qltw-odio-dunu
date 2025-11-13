@@ -13,6 +13,10 @@ import Image from "next/image";
 import logo from "../public/truactlogo.png";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import GoogleTranslate from "@/components/GoogleTranslator/Googletranslator";
+import { LanguageProvider } from "@/components/Context/languageContext";
+import LanguageFloatingToggle from "@/components/LangFloatingToggle/LanguageUI";
+
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -77,28 +81,39 @@ export default function RootLayout({ children }) {
         <ThemeProvider attribute="class" defaultTheme="light">
           <AppSettingsProvider>
             <CustomThemeProvider>
-              <ThemeAwareLoader />
-              <div className="flex flex-col min-h-screen">
-                
-                {/* Show full Navbar on regular pages */}
-                {!shouldHideLayout && <Navbar />}
+              <LanguageProvider>
+                <ThemeAwareLoader />
+                <div className="flex flex-col min-h-screen">
+                  
+                  {/* Show full Navbar on regular pages */}
+                  {!shouldHideLayout && <Navbar />}
 
-                {/* Show only logo on excluded pages */}
-                {shouldHideLayout && (
-                  <div className="flex justify-items-start border rounded-sm bg-[var(--color-primary)] text-[var(--color-on-primary)]">
-                    <Image className="pt-1 pl-1.5 pb-1.5" src={logo} alt="Logo" width={100} height={100} />
-                  </div>
-                )}
+                  {/* ✅ Add language switch here
+                  {!shouldHideLayout && (
+                    <div className="absolute top-4 right-4 z-[9999]">
+                      <GoogleTranslate />
+                    </div>
+                  )} */}
 
-                <main className="flex-grow w-full pb-16 pt-[50px] md:pt-[120px]">
-                  {children}
-                </main>
+                  {/* Show only logo on excluded pages */}
+                  {shouldHideLayout && (
+                    <div className="flex justify-items-start border rounded-sm bg-[var(--color-primary)] text-[var(--color-on-primary)]">
+                      <Image className="pt-1 pl-1.5 pb-1.5" src={logo} alt="Logo" width={100} height={100} />
+                    </div>
+                  )}
 
-                {!shouldHideLayout && <Footer />}
-              </div>
+                  <main className="flex-grow w-full pb-16 pt-[50px] md:pt-[120px]">
+                    {children}
+                  </main>
+
+                  {!shouldHideLayout && <Footer />}
+                </div>
+                <LanguageFloatingToggle />
+              </LanguageProvider>
             </CustomThemeProvider>
           </AppSettingsProvider>
         </ThemeProvider>
+        {/* <LanguageFloatingToggle /> */}
       </body>
     </html>
   );
